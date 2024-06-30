@@ -1,0 +1,31 @@
+Lab #5: CSRF vulnerability where token is tied to non-session cookie 
+
+     Target Goal:
+          Exploit the CSRF vulnerability and change the email address  
+      
+     Credentials: 
+          Our   :>   weiner:peter
+          Extra :>   carlos:montoya
+
+     Analysis:
+            Vulnerable parameter: Email change functionality
+            
+            • For a CSRF attack to be possible, three key conditions must be in place:
+                  • A relevant action  ==  Email Change
+                  • cookie-based session handling   ==   using session cookie  
+                  • No unpredicable request parameters   ==  only email parameter so satisfy 
+                
+            >> Login 
+            >> Capture the email change request and it contains thre parameters 'email', 'cookie' and 'cookie-key'
+            >> Check if the CSRF token is tied to CSRF cookie  
+                  • Submit an invalid CSRF token
+                  • Submit the valid CSRF token from another user 
+                  • Submit the valid CSRF token and CSRF cookie from another user
+            >> Inorder to exploit this vulnerability we need to perform the following steps 
+                  • Inject the csrfkey  cookie in the user's session (HTTP header injection)
+                  • Send a CSRF attack to the victim with the known CSRF token
+            >> right click > Engagement tools > generate CSRF POC (select auto submit option)
+            >> Copy the CSRF POC or Html code and submit at the exploit server in burp  
+           
+           Before executing the script host the server on python using ' python -m SimpleHTTPServer 5555 '
+           After that in browser open ' http://127.0.0.1:5555/filename.html '

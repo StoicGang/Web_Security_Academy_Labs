@@ -1,0 +1,9 @@
+Lab #07 : Weak Isolation on dual use Endpoint
+
+     Target Goal: 
+          Exploit low level logic flow in account registration process to gain access tothe admin panal and delete carlos
+     
+     Credentials: 
+         weiner :> peter
+         
+     Analysis:

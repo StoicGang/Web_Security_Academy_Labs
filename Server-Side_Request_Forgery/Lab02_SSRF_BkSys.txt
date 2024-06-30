@@ -1,0 +1,12 @@
+Lab #2: Basic SSRF against another backend system
+
+     Target Goal:
+          change the stock check Functionality to scan the internal 192.168.0.x range for an admin interface on a port 8080 and delete the user carlos
+    
+     Analysis:
+         Vulnerable Feature: Stock check Functionality 
+    
+         >> Send the check stock URL to the repeater and decode the 'stockApi' parameter 
+         >> Send the request to intruder and modify the value of 'x' in 192.168.0.x in range of 0-225 
+         >> Here 'http://192.168.0.190:8080/admin' will give you access to the admin  interface
+         >> delete the user carlos 'http://192.168.0.190:8080/admin/delete?username=carlos' 

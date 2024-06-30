@@ -1,0 +1,155 @@
+#Authentication Vulnerabilities
+      
+      
+       ************************************ Terminologies ***********************************************************
+          Authentication identifies the user and confirms that they say who they say they are.
+           • HTML form-based authentication
+           • Multi-factor mechanisms
+           • Windows-integrated authentication using NTLM or Kerberos
+         
+       
+       ************************************ What are the authentication flaws? **************************************
+            Authentication Vulnerabilities arise from insecure implementation of the authentication mechanisms in an application.
+            
+            *types**
+              1. Weak Password Requirements
+              
+                  Having no or minimal controls over the quality of users' passwords.
+                      • Very short or blank
+                      • Common dictionary words or names
+                      • Password is the same as the username
+                      • Use of default password
+                      • Missing or ineffective MFA
+           
+                  The Consumer Authentications Strength Maturity model
+                           
+                            8.PASSLESS      (PASSWORDLESS)
+                            7.CODELESS      (APP BASED CODELESS 2FA)
+                            6.APP2FA        (APP BASED 2FA CODES)
+                            5.SMS2FA        (SMS BASED 2FA CODES)
+                            4.PASSMAN       (PASSWORD MANAGER)   
+                            3.QUALPASS      (QUALITY PASSWORDS)
+                            2.UNIQUEPASS    (UNIQUE PASSWORDS)         (pass contains personal info.)
+                            1.SHARPASS      (SHARED PASSWORDS)         (same password multiple times)      (Credentials stuffing)
+           
+                            Link: https://danielmiessler.com/blog/casmm-consumer-authentication-security-maturity-model/
+                   
+              2. Improper Restriction of Authentication Attempts
+              
+                 Application permits brute force or other automated attacks.
+                   • Login page
+                   • OTP/MFA page
+                   • Change password page
+              
+              3. Verbose Error Messages
+                 The application outputs a verbose error message that allows for username enumeration.
+              
+              4. Vulnerable Transimission of Credentials
+                 The application uses an unencrypted HTTP connection to transmit login credentials.
+              
+              5. Insecure Forgot Password Functionality
+                 Design weaknesses in the forgotten password functionality usually make the weakest link that can be used to attack the application's overall authentication logic.
+               
+              6. Defects in Multistage Login Mechanism
+                 Insecure implementation of the MFA Function.
+                 Attacker can change the "Account" cookies to the victim's username and coompromise the victim's account
+                
+              7. Insecure Storage of Credentials
+                 Uses plain text, encrypted, or weekly hashed password data stores.
+       
+       
+       ************************************ Impact of Authentication Vulnerabilities ********************************
+            
+            • Unauthorized access to the application.
+              • Confidentiality — Access to other users' data.
+              • Integrity — Access to update other users' data
+              • Availability — Access to delete users and their data.
+      
+            • Can sometimes be chained with other vulnerabilities to gain remote code execution on the host operating system.
+            
+       
+       ************************************ How to find and exploit Authentication flaws ****************************
+        
+            1. Weak Password Complexity Requirements
+            
+             • Review the website for any description of the rules.
+             • If self registration is possible, attempt to register several accounts with different kinds of weak passwords to discover what rules are in place.
+                • Very short or blank.
+                • Common dictionary words or names.
+                • Password is the same as the username.
+             • If you control a single account and password change is possible, attempt to change the password to various weak values.
+          
+            2. Improper Restriction of Authentication Attempts
+            
+               • Manually submit several bad login attempts for an account you control.
+               • After 10 failed login attempts, if the application does not return a message about account lockout, attempt to log in correctly. If it works, then there is no lockout mechanism.
+                 • Run a brute force attack to enumerate the valid password. Tools: Hydra, Burp Intruder, etc.
+               • If the account is locked out, monitor the requests and responses to determine if the lockout mechanism is insecure.
+          
+               NOTE: Apply this test on all authentication pages.
+          
+            3. Verbose Error Message 
+             
+               • Submit a request with a valid username and an invalid password.
+               • Submit a request with an invalid username.
+               • Review both responses for any differences in the Status code, any redirects, information displayed on the screen, HTML page source, or even the time to process the request      
+               • If there is a difference, run a brute force attack to enumerate the list of valid usernames in the application.
+          
+               NOTE: Apply this test on all authentication pages.   
+            
+            4. Vulnerable Transimission of Credentials
+        
+               • Perform a successful login while monitoring all traffic in both directions between the client and server
+               • Look for instances where credentials are submitted in a URL query string or as a cookie, or are transmitted back from the server to the client.
+               • Attempt to access the application over HTTP and if there are any redirections to HTTPS.
+            
+            5. Insecure Forgot password Functionalities
+            
+               • Identify if the application has any forgotten password functionality.
+               • If it does, perform a complete walk-through of the forgot password functionality using an account you have control of while intercepting the requests / responses in a proxy.
+               • Review the functionality to determine if it allows for username enumeration or brute-force attacks.
+               • If the application generates an email containing a recovery URL, obtain a number Of these URLs and attempt to identify any predictable patterns or sensitive information included in the URL. Also check if the URL is long lived and does not expire.   
+          
+            6. Defects in Multistage Login Mechanism
+        
+               • Identify if the application uses a multistage login mechanism.
+               • If it does, perform a complete walk-through using an account you have control of while intercepting the requests / responses in a proxy
+               • Review the functionality to determine if it allows for username enumeration or brute-force attacks.
+          
+            7. Insecure Storage of Credentials
+        
+               • Review all the application's authentication related functionality. If you find any instances where the user's password is transmitted to the client (plaintext or obfuscated, this indicates the passwords are being stored insecurely.
+               • If you gain remote code execution (RCE) on the server, review the database to determine if the passwords are stored insecurely.
+               • Conduct technical interviews with the developers to review how passwords are stored in the backend database.    
+       
+       
+       ************************************ Resources ***************************************************************
+         
+            • Web Security Academy — Authentication Vulnerabilities
+               https://portswiggetnet/web-security/authentication
+            
+            • Web Application Hacker's Handbook
+               Chapter 6 —Attacking Authentication
+            
+            • OWASP Web Security Testing Guide — Authentication
+               https://owasp.org/www-project-web-security-testing-guide/stable/4-Web_Application_Security_Testing/README
+            
+            • OWASP Top IO — A07 Identification and Authentication Failures
+               https://owasp.org/Top10/A07_2021-Identification_and_Authentication_Failures/
+            
+            • OWASP Application Security Verification Standard — V2 Authentication Verification Requirements
+               https://owasp.org/www-pdf-archive/OWASP_AppIication_Security_Verification_Standard_4.O-en.pdf
+       
+       
+       ************************************ Preventing Authentication Vulnerabilities *******************************
+        
+            • Wherever possible, implement mufti-factor authentication.
+            • Change all default credentials.
+            • Always use an encrypted channel / connection (HTTPS) when sending user credentials.
+            • Only POST requests should be used to transmit credentials to the server.
+            • Stored credentials should be hashed and salted using cryptographically secure algorithms.
+            • Use identical, generic error messages on the login form when the user enters incorrect credentials.
+            • Implement an effective password policy that is compliant with NIST 800-63-b's guidelines.
+              • Use a simple password checker to provide real time feedback on the strength of the password. For example: zxcvbn JavaScript library.
+            • Implement robust brute force protection on all authentication pages.
+            • Audit any verification or validation logic thoroughly to eliminate flaws. 

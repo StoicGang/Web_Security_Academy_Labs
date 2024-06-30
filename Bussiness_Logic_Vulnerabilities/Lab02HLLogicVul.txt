@@ -1,0 +1,11 @@
+Lab #02 : High-level Logic Vulnerability
+
+     Target Goal: 
+          Exploit logic flow to buy the Lightweight l33t leather jackets
+
+     Credentials: 
+       weiner :> peter
+
+     Analysis: 
+       >> Login as the user 
+       >> Buy negative quantity of item so that the value is below the cred value($100) 

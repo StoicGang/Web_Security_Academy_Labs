@@ -1,0 +1,19 @@
+Lab #2: CORS vulnerability with trusted null origin  
+      
+      Target Goal: 
+           Exploit CORS misconfiguration to retrieve the administrator's API key 
+           
+      Credentials: 
+          Our   :>   weiner:peter
+
+      Analysis: 
+            
+            >> Testing for CORS misconfiguration 
+               1. Change the origin to an arbitrary value //true
+                   give value of 'origin' to 'http://example.com'
+               2. Change the origin value to NULL value
+                   give value of 'origin' to NULL 
+            >> Login to the regular account 
+            >> Put the html script into the body at sever given by the portswigger 
+            >> In Logs you can see the api key and then submit 
+        NOTE: Add URL of the server on which you want to see the logs in the script at the proper place 

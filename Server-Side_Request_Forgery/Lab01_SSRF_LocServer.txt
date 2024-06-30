@@ -1,0 +1,11 @@
+Lab #1: Basic SSRF against the local server
+
+     Target Goal:
+          change the stock check URL to access the admin interface at http://localhost/admin  and delete the user carlos
+    
+     Analysis:
+         Vulnerable Feature: Stock check Functionality 
+          
+         >> Send the check stock URL to the repeater and decode the 'stockApi' parameter 
+         >> Change the 'stockApi' parameter to http://localhost/admin to get the admin interface or admin panel 
+         >> Change the 'stockApi' parameter to http://localhost/admin/delete?username=carlos  to delete the user carlos

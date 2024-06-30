@@ -1,0 +1,98 @@
+#Directory Traversal Vulnerabilities
+  
+
+  ************************************************ What is the directory traversal vulnerability *******************************************
+       Directory Traversal (or also known as file path traversal) is a vulnerability that allows an attacker to read files on the server that is running the application.
+  
+
+  ************************************************ Impact of Directory Traversal Vulnerabilities *******************************************
+ 
+       • Unauthorized access to the application.
+           • Confidentiality — Allows you to read files on the system.
+           • Integrity — Some cases allow you to run commands and therefore alter files on the system.
+           • Availability — Some cases allow you to run commands and therefore delete files on the system.
+    
+       • If the directory traversal vulnerability allows you to run commands, then you can get full code execution on the server.
+  
+
+  ************************************************ HOW TO FIND DIRECTORY TRAVERSAL VULNERABILITIES? ****************************************
+  
+      1. Finding Directory Traversal Vulnerabilities depending on the perspective of testing.
+           
+           a. Black Box Testing
+              • Map the application.
+                 • Identify all instances where the web application appears to contain the name of a file or directory
+                 • Identify all functions in the application whose implementation is likely to involve retrieval of data from a server filesystem.
+              • Test identified instances with common directory traversal payloads and observe how the application responds.
+                  ../../../../etc/passwd
+                  ../../../etc/passwd
+                  ../../../htaccess
+                  \..\WINDOWS\win.ini
+                  \..\..\WINDOWS\win.ini
+                  ...
+              • Automate testing using a web application vulnerability scanner (WAVS).
+          
+           b. White Box Testing
+              • Identify instances where user-supplied input is being passed to file APIs or as parameters to the operating system.
+                  • Identify instances in a running application first (black-box) perspective and then review the code responsible for that functionality.
+                  • Grep on functions in the code that are known to include and evaluate files on the server and review if they take user supplied input.
+                  • Use a tool to monitor all filesystem activity on the servet Then test each page of the application by inserting a single unique string. Set a filter in your monitoring tool for that specific string and identify all filesystem events that contain the string.
+              • Validate potential directory traversal vulnerabilities on a running application.
+   
+           c. Grey Box Testing
+  
+
+  ************************************************ Exploiting Directory Traversal **********************************************************
+
+         • Regular case
+            ../../../../../etc/passwd
+            .\..\..\..\..\..\..\..\windows\win.ini
+
+         • Absolute paths
+            /etc/passwd
+   
+         • Traversal sequences stripped non-recursively
+            ....//....//....//etc/passwd
+            ../../../etc/passwd
+   
+         • Bypass traversal sequence stripped defense using URL encoding.
+            %2e%2e%2e%2e%2e%2e3X2fX7øX61X73X77X64
+
+         • Bypass start of path validation.
+            /var/www/images/../../etc/passwd
+
+         • Bypass file extension validation using null byte.
+            /.. /.. /etc/passwdtøe.png
+  
+
+  ************************************************ How to prevent Directory Traversal Vulnerabilities? *************************************
+  
+      • The best way to prevent directory traversal vulnerabilities is to avoid passing user-supplied input to filesystem APIs.
+
+      • If that is unavoidable, then two layers of defense should be used together to prevent this type of attack.
+        1. Validate user input by comparing it to an allow list of permitted values. If that's not possible, ensure that the input only contains alphanumeric characters.
+
+        2. After validating the user supplied input, use filesystem APIs to canonicalize the path and verify that it starts with the expected base directory.
+        
+           File file = new File(BASE_DIRECTORY, userInput);
+           if (file.getCannonicalPath().startWith(BASE_DIRECTORY)) {
+               //PROCESS FILE
+           }
+  
+
+  ************************************************ Resources *******************************************************************************
+    
+       • Web Security Academy — Directory Traversal
+         https://portswigger.net/web-security/file-path-traversal
+    
+       • Web Application Hacker's Handbook
+         Chapter IO — Attacking Back-End Components (pages 368-381)
+    
+       • OWASP Web Security Testing Guide — Testing Directory Traversal File Include
+         https://owasp.org/www•project-web-security-testing-guide/latest/4-kb_Application_Security_ksting/05-Authorization_ ksting/OI-ksting_Directory_
+    
+       • OWASP Path Traversal
+         https://owasp.org/www-community/attacks/Path_ Traversal
+   
+       • OWASP Application Security Verification Standard — V12.3 File Execution
+         https://owasp.org/www-pdf-archive/OWASP_AppIication_Security_Verification_Standard_4.O-en.pdf

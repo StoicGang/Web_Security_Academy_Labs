@@ -1,0 +1,12 @@
+Lab #5: URL based access control can be circumvented
+
+    Target Goal:  
+         Find the admin panel and delete user carlos       
+    
+    Credentials: 
+       weiner :> peter 
+    
+    Analysis: 
+      >> Login
+      >> In the request you are denied to access the admin panel                      
+      >> Add 'X-original-URL = /admin/' to the headers in the request   

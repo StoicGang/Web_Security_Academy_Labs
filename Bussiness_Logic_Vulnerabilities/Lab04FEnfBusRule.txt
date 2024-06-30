@@ -1,0 +1,14 @@
+Lab #04 : Flawed enforcement of business rules
+
+     Target Goal: 
+          Exploit logic flow to buy the lightweight l33t leather jacket
+     
+     Credentials: 
+         weiner :> peter
+     
+     Analysis:
+       >> login using the user Credentials
+       >> Add the item to cart (in which there is the new option for coupon code)
+       >> Apply the coupon code
+       >> Again come to home and sign up using test@test.com 
+       >> Using the alternate coupon codes take down the price of the item to desired price

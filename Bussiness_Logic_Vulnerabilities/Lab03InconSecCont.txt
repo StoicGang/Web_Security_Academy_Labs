@@ -1,0 +1,9 @@
+Lab #03 : Inconsistent Security Controls
+
+     Target Goal:
+          Exploit logic flow to access the admin panal and delete the user (carlos)
+     
+     Analysis:
+       >> Login as the user using the email agent of the websecurity academy 
+       >> update your email as the admin email id 
+       >> delete the user carlos from the admin dashboard

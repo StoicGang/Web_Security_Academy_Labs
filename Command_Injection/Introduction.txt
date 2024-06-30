@@ -1,0 +1,97 @@
+#Command Injection
+     
+     **************************************** What is Command Injection? **************************************************
+          OS Command Injection
+            OS Command Injection is a vulnerability that consists of an attacker executing commands on the host operating system via a vulnerable application.
+     
+             import java. io.IOException;
+             import javax. servlet.http.HttpServIetRequest;
+             public void runUnsafe(HttpServletRequest request) throws IOException {
+               String crrd = request.getParameter(•command");
+               String arg =
+               Runtime. getRuntime().exec(cmd+" "+arg);
+             }
+     
+             Line #6 allows execution Of arbitrary commands via client-side input.
+     
+          **Types**
+     
+            1. In-band Command Injection
+                Consists of an attacker executing commands on the host operating system via a vulnerable application and receiving the response of the command in the application.
+            2. Blind Command Injection
+                Consists of an attacker executing commands on the host operating system via a vulnerable application that woes nQt return the output from the command within its HTTP response.
+     
+     
+     **************************************** Impact of Command Injection Attacks *****************************************
+          
+          • Unauthorized access to the application and host operating system.
+             • Confidentiality — Command injection can be used to view sensitive information.
+             • Integrity — Command injection can be used to alter content in the application.
+             • Availability — Command injection can be used to delete content in the application.
+     
+          • Remote code execution on the operating system
+     
+     
+     **************************************** How to find Command injection vulnerability *********************************
+     
+           Depends on the perspective of the testing 
+             
+             1. Black-Box testing
+     
+                 • Map the application.
+                       • Identify all instances where the web application appears to be interacting with the underlying operating system.
+                 • Fuzz the application.
+                       • Shell metacharacters: &, &&, |, ||, ;, \n, ', $, ().
+                 • For in-band command injection, analyze the response of the application to determine if it's vulnerable.
+                 • For blind command injection, you need to get creative.
+                       • Trigger a time delay using the ping or sleep command.
+                       • Output the response of the command in the web root and retrieve the file directly using a browser.
+     
+             2. White-Box testing
+     
+                 • Perform a combination of black box and white-box testing.
+                 • Map all input vectors in the application.
+                 • Review source code to determine if any of the input vectors are added as parameters to functions that execute system commands.
+                 • Once a vulnerability is identified, test it to confirm that it is exploitable.                                      
+                                                   
+                                                   
+     **************************************** How to Exploit the command injection Vulnerability **************************
+             
+             • Exploiting In-band Command Injection                                      
+                • Shell metacharacters: &, &&, |, ||, ;, \n, ', $, ()
+                • Concatenate another command  
+     
+             • Exploiting Blind Command Injection      
+                • Shell metacharacters: &, &&, |, ||, ;, \n, ', $, ()         
+                • Trigger a time delay (sleep and ping commands)  
+                • Output the response of the command in the web root and retrieve the file directly using a browser.                   
+                • Open an out-of-band channel backto server we control 
+     
+     
+     **************************************** How to Prevent command injection ********************************************
+     
+             1. The most effective way to prevent OS command injection vulnerabilities is to never call out to OS commands from application-layer code. Instead, implement the required functionality using safer platform APIs.
+                 • For example: use mkdir() instead of system("mkdir /dir_name")
+     
+             2. It is required to perform OS commands using user-supplied input, then strong input validation must be performed.
+                 • Validate against a whitelist Of permitted values.
+                 • Validate that the input is as expected or valid input.
+     
+     
+     **************************************** Resources *******************************************************************
+            
+            • Web Security Academy — OS Cbmmand Injection
+              https://portswigger.net/web-security/os-command-injection
+     
+            • Web Application Hacker's Handbook
+              Chapter IO — Attacking Back-End Components (pgs. 362 — 368)
+              Chapter 21 — A Web Application Hacker's Methodology (pgs. pgs. 832 — 833)
+     
+            • OWASP Command Injection
+              https://owasp.org/www-community/attacks/Command_Injection
+     
+            • OWASP OS Command Injection Defense Cheat Sheet
+              https://cheatsheetseries.owasp.org/cheatsheets/OS_Command_lnjection_Defense_Cheat_Sheet.html
+            
+            • OWASP WSTG Testing for Command Injection
+              https://owasp.org/www-project-web-security-testing-guide/Iatest/4-Web_Application_Security_Testing/07-lnput_Validation_Testing/12-Testing_for_Command

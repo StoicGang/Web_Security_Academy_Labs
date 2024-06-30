@@ -1,0 +1,13 @@
+Lab #01 : Excessive trust in client-side controls
+
+     Target Goal: 
+          Exploit logic flow to buy the Lightweight l33t leather jackets
+     
+     Credentials: 
+         weiner :> peter
+     
+     Analysis: 
+      >> Login into the Lab 
+      >> find cart options 
+      >> Change the value using the burpsuite
+      >> Purchase the lightweight l33t item 

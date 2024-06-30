@@ -1,0 +1,17 @@
+Lab #13: Referer-based access control
+
+     Target Goal: 
+          Exploit the access control flow to promote the user to administrator 
+    
+     Credentials: 
+         weiner :> peter
+         administrator :> admin
+    
+     Analysis: 
+          By default according to this lab admin is refering regular user to modify its role  
+          >> Login with the administrator user and learn how things work
+          >> Get the requests resposible to change the access control flow
+          >> Login with the regular user's  username and password
+          >> check the inspector and in application settings get the session cookie  
+          >> change the session cookie  parameter to 'cookie which we got  from the inspector' and the userid to 'weiner' of the request  
+          >> Follow redirection and You are good to go  

@@ -1,0 +1,7 @@
+Lab #2 - file path traversal. traversal sequences blocked Vith absolute path bypass
+
+     Target Goal - 
+          Retrieve the contents of the /etc/passwd file.
+     
+     Analysis:
+      filename: /etc/passwd

@@ -1,0 +1,8 @@
+Lab #4 : File path traversal. traversal sequences stripped w/ URL-decode 
+
+     Target Goal:
+          Retrieve the contents of the /etc/passwd file.
+     
+     Analysis:
+      filename=../../../../etc/passwd 
+      then encode the ../../../../etc/passwd content and then decode and send again using the repeater method in the burpsuite 

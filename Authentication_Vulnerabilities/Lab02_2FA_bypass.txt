@@ -1,0 +1,14 @@
+Lab #2: 2FA simple bypass
+
+    Target Goal: 
+          Bypass the 2FA verification and access Carlos's account 
+    
+    Credentials: 
+       Our      :>   weiner:peter
+       Target   :>   carlos:montoya
+        
+    Analysis: 
+       
+       >> Login using given credentials and 2FA code 
+       >> Logout form the account and try to login with 'carlos' username
+       >> In proxy tab of burp drop MFA request and add directory of "my-account" in url of application 

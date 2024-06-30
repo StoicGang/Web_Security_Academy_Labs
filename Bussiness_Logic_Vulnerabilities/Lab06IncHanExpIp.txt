@@ -1,0 +1,14 @@
+Lab #06 : Inconsistent handling of exceptional input
+
+     Target Goal: 
+          Exploit low level logic flow in account registration process to gain access tothe admin panal and delete carlos
+     
+     Credentials: 
+         weiner :> peter
+     
+     Analysis:
+       if we are using burp pro feature then after choosing engagement tool find the directories which are not shown (hidden directories)  
+     
+       length of valid email id is 255 so arrange you email such that the email contains the domain of dontwannacry.com 
+       email id :
+         AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAdontwannacry.com

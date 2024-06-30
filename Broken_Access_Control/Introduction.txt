@@ -1,0 +1,100 @@
+#Boken Access Control Vulnerabilities
+ 
+      
+      *********************************************** Terminologies ***************************************************************
+      
+         1. Authentication ::> Identifies the user and confirms that they say who they say they are. 
+         
+         2. Session Management ::> Identifies which subsequent HTTP requests are being made by each user. (Authentication many times is prevented by generating a cookie)
+         
+         3. Access Control determines whether the user is allowed to carry out the action that they are attempting to perform.     
+           • Vertical Access Control is used to restrict access to functions not available for other users in the organization.(regular user will not have access to admin panal)
+           • Horizontal Access Control is used to restrict access to different users to access the similar resources in the organization. (Two regular users can't access each others resources in the organization)
+           • Context-Dependent Access Control restricts access to functionality and resources based on the state of the application or the user's interaction with it. (can't break the fixed state of the application or the user's interaction with application)
+      
+     
+      *********************************************** What is Broken Access Control vulnerabilities *******************************
+       
+         Broken Access Control vulnerabilities arise when users can act outside of their intended permissions. This typically leads to sensitive information disclosure, unauthorized access and modification or destruction of data.
+          
+         **Types**
+            
+            • Horizontal Privilege Escalation
+              Horizontal privilege escalation occurs when an attacker gains access to resources belonging to another user of the same privilege level.
+            • Vertical Privilege Escalation
+              Vertical privilege escalation occurs when an attacker gains access to privileged functionality that they are not permitted to access.
+            • Access Control Vulnerabilities in Multi-Step Processes
+              These type of vulnerabilities occur when access control rules are implemented on some of the steps, but ignored on others.
+            • Other Access Control Examples
+               • Bypassing access control checks by modifying parameters in the URL or HTML page.
+               • Accessing the API with missing access controls on the POST, PUT and DELETE methods.
+               • Manipulating metadata, such as replaying or tampering with JSON Web Tokens (JWTs) or a cookie.
+               • Exploiting CORS misconfiguration that allow API access from unauthorized / untrusted origins.
+               • Force browsing to authenticated pages as an unauthenticated user.
+     
+     
+      *********************************************** Impact of Access Control Vulnerabilities ************************************
+          
+          • Unauthorized access to the application.
+               • Confidentiality — Access to other users' data.
+               • Integrity — Access to update other users' data
+               • Availability — Access to delete users.
+          
+          • Can sometimes be chained with other vulnerabilities to gain remote code execution on the host operating system.
+      
+     
+      *********************************************** How to find Broken Access Control Vulnerabilities ***************************
+           
+           Depends on the perspective of testing.
+            
+            1. Black Box Testing
+               • Map the application.
+                   • Identify all instances where the web application appears to be interacting with the underlying operating system.
+               • Understand how access control is implemented for each privilege level.
+               • Manipulate parameters that are potentially used to make access control decisions in the backend.
+               • Automate testing using extensions like Autorize.
+            
+            2. White Box Testing          
+               • Review the code to identify how access control is implemented in the application.
+                  • System defaults to open.
+                  • Weak or missing access control checks on functions / resources.
+                  • Missing access control rules for POST, PUT and DELETE methods at the API level.
+                  • Relying solely on client-side input to perform access control decisions.         
+               • Validate potential access control vulnerabilities on a running application.
+      
+     
+      *********************************************** How to exploit access control vulnerabilities *******************************
+        
+           • Depends on the type of access control vulnerability  
+           • Usually just a matter of manipulated the vulnerable field or parameter  
+      
+     
+      *********************************************** Preventing access control vulnerabilities ***********************************
+          
+          • Use a security-centric design where access is verified first and ensure all requests go through an access control check.
+          • Except for public resources, deny access by default.
+          • Apply the principal of least privilege throughout the entire application.
+          • Consider using attribute or feature-based access control checks instead of role-based access control.
+             • NIST Attribute Based Access Control
+               https://wwwyoutube.com/watch?v=cg%7YnGfHA&ab_channel=NationallnstituteofStandardsandTechnology
+             • NIST Special Publication 800-162:
+               https://nvlpubs.nist.gov/nistpubs/specialpublications/NlST.sp.800-162.pdf
+          • Access Control checks should always be perfomed on the server side. 
+      
+     
+      *********************************************** Resources *******************************************************************
+       
+            • Web Security Academy — Access Control
+              https://portswigger.net/web-security/access-control
+            
+            • Web Application Hacker's Handbook
+              Chapter 8 —Attacking Access Controls
+            
+            • OWASP Web Security Testing Guide — Authorization
+              https://owasp.org/www-project-web-security-testing-guide/v42/4-Web_AppIication_Security_testing/05-Authorization_testing/README 
+            
+            • OWASP Top 10 -AOI Broken Access Control
+              https://owasp.org/Top10/A01_2021-Broken_Access_Control/
+            
+            • OWASP Application Security Verification Standard —V4 Access Control
+              https://owasp.org/www-pdf-archive/OWASP_Application_Security_Verification_Standard_4.O-en.pdf

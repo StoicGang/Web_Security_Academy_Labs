@@ -1,0 +1,124 @@
+#Server-Side Request Forgery(SSRF)
+      
+      
+      ******************************************** What is the server-side request forgery **********************************************
+            SSRF is a vulnerability class that occurs when an application is fetching a remote resource without first validating the user- supplied URL.
+          
+            **Types**
+              1. Regular/In Band 
+                 There is a back response from the server in the application
+                
+              2. Blind/ Out-of Band
+                 No back response from the server in the application
+      
+
+      ******************************************** Imapact of  SSRF attacks *************************************************************
+            
+            • Depends on the functionality in the application that is being exploited
+               • Confidentiality —can be None / Partial (Low) / High
+               • Integrity — can be None / Partial (Low) / High
+               • Availability — can be None / Partial (Low) / High
+            • Can lead to sensitive information disclosure, scan of internal network,compromise of internal services, remote code execution, etc.
+      
+
+      ******************************************** How to find the SSRF Vulnerability ***************************************************
+            
+            Depends on the perspective of the Testing 
+      
+               1. Black-Box Testing
+                  • Map the application
+                    • Identify any request parameters that contains hostnames, IP  addresses or full URL's 
+                  • For each request parameter, modify its value to specify an alternative resource and ovserve how the application responds to the request. 
+                    • If a defense is in place, attempt to circumvent it using known techniques 
+                  • For each request parameter, modify its value to server on the internet that you control and monitor the server for incoming requests
+                    • If no incoming requests or connections are received , monitor the time taken for the application to respond.  
+              
+               2. White-Box Testing
+                  • Review source code and identify all request parameters that accept URLs
+                  • This could be done by combining both a black-box and white-box testing perspective
+                  • Determine what URL parser is being used and if it can be bypassed. Similarly determine what additional defenses are put in place that can be bypassed
+                  • Test any potential SSRF vulnerabilities
+      
+      
+      ******************************************** How to Exploit the SSRF vulnerability ************************************************
+      
+              1. Regular/ In-Band SSRF vulnerability
+      
+                  • If the application allows for user-supplied arbitrary URLs, try the following attacks:
+                       • Determine if a port number can be specified
+                       • If successful, attempt to port-scan the internal network using Burp Intruder
+                       • Attempt to connect to Other services on the loopback address
+                  • If the application does not allow for arbitrary user-supplied URLs, try to bypass defense using the following techniques
+                       • Use differnt encoding schemes 
+                           • decimal-encoded version of 127.0.0.1 is 2130706433
+                           • 127.1 resolves to 127.0.0.1 
+                           • Octal representation of 127.0.0.1 is 017700000001
+                       • Register a domain name that resolves to internal IP address(DNS Rebinding)
+                       • Use your own server that redirects to an internal IP address(HTTP Redirection)
+                       • Exploit inconsistencies in URL parsing 
+      
+                   Example:
+                        Request: 
+                          POST /product/stock HTTP/I.Ø
+                          Content-Type: application/x-www-form-urlencoded
+                          Content-Length: 118
+          
+                          stockApi=http://stock.weliketoshop.net:8080/product/stock/checkX3Fproduct1dX3D6X26store1dX3D1
+                          
+                        Response:
+                          HTTP/1.1 200 OK
+                          Content-type: text/plain;
+                          charset=utf-8
+                          Connection: close
+                          Content-Length: 3
+          
+                          506
+       
+              2. Blind/ Out-of-Band vulnerability
+      
+                  • If the application is vulnerable to blind SSRF, try to exploit the vulnerability using the following techniques:
+                       •  Attempt to trigger an HTTP request to an external system you control and monitor the system for network interactions from the vulnerable server
+                           • Can be done using Burp Collaborator
+                       • If defenses are put in place, use the techniques mentioned in the previous slides to obfuscate the external malicious domain
+                       • Once you've proved that the application is vulnerable to blind SSRF, you need to determine what your end goal is
+                           • An example would be to probe for other vulnerabilities on the server itself or other backend systems
+      
+
+      ******************************************** How to Prevent SSRF vulnerabilities **************************************************
+      
+              Defense in depth approach:
+
+                   Application Layer Defenses 
+                        • Sanitize and validate all client-supplied input data
+                        • Enforce the URL schema, port, and destination with a positive allow list
+                        • Do not send raw responses to clients
+                        • Disable HTTP redirections
+                    Note: Do not mitigate SSRF vulnerabilities using deny lists or regular expressions.
+           
+                   Network Layer Defenses
+                        • Segment remote resource access functionality in separate networks to reduce the impact of SSRF
+                        • Enforce "deny by default" firewall policies or network access control rules to block all but essential intranet traffic   
+      
+
+      ******************************************** Resources ****************************************************************************
+      
+            • Web Security Academy - SSRF
+              https://portswigger.net/web-security/ssrf 
+      
+            • Web Application Hacker's Handbook
+              Chapter 10 — Attacking Back-End Components (pgs. 390 — 392}
+      
+            • OWASP-SSRF
+              https://owasp.org/www-community/attacksServer_Side_Request_Forgery
+      
+            • Server-Side Request Forgery Prevention Cheat Sheet
+              https://cheatsheetseries.owasp.orq/cheatsheets/Server_Side_Request_Forqery_Prevention_Cheat_Sheet.html
+      
+            • SSRF Bible Cheat Sheet
+              https://cheatsheetseries.owasp.orq/cheatsheets/Server_Side_Request_Forqery_Prevention_Cheat_Sheet_SSRF_Bible.pdf
+            
+            • Preventing Server-Side Request Forgery Attacks
+              https://seclab.nu/static/publications/sac21-prevent-ssrf.pdf
+      
+            • A New Era of SSRF - Exploiting URL Parser in Trending Programming Languages!
+              https://www.blackhat.com/docs/us-17/thursday/us-17-Tsai-A-New-Era-Of-SSRF-Exploiting-URL-Parser-ln-Trending-programming-Languages.pdf 

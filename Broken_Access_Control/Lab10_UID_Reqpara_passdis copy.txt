@@ -1,0 +1,15 @@
+Lab #10: UID controlled by reques parameter, with password disclosure
+
+    Target Goal: 
+       Retrieves the administrator's password  and compromise his account       
+   
+    Credentials: 
+        weiner :> peter
+        administrator :> admin
+   
+    Analysis: 
+      >> Login with the regular user's  username and password
+      >> check the request to login in burpsuite 
+      >> change the userid parameter to 'administrator' 
+      >> Login with account of administrator  
+      >> Delete the user 'carlos' 

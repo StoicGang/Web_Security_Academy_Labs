@@ -1,0 +1,12 @@
+Lab #14: 2FA bypass usign a brute force attack
+
+     Target Goal:
+          Exploite logic flow flaw vulnerability in brute force protection mechanism to access the carlos's hashed password, crack it and delete it 
+     
+     Credentials:      
+          Our      ::>   weiner:peter
+          Target   ::>   carlos:montoya 
+     
+     Analysis: 
+          use the script and get the list of password in list format 
+          change the password query by the lsit given by the python list 

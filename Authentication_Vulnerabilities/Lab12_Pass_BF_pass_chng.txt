@@ -1,0 +1,14 @@
+Lab #12: password brute force via password change    
+
+     Target Goal: 
+          Exploite the password change vulnerability to access the carlos's hashed password, crack it and delete it 
+     
+     Credentials: 
+      Our      :>   weiner:peter
+      Target   :>   carlos
+     
+     Analysis: 
+       
+      new password don't match && current password is incorrect -> Current password is incorrect
+      new password don't match && current password is correct -> New password doesn't match     
+       carlos:000000

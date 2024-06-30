@@ -1,0 +1,23 @@
+Lab #6: Broken brute-force protection, IP block
+
+   Target Goal: 
+         Brute force the target account's password 
+   
+   Credentials: 
+     Our      :>   weiner:peter
+     Target   :>   Carlos
+   
+   Analysis: 
+      Wordlist for username and password are given
+      it locks login attempts after 3rd attempt (change x-forwarded for x so that we can again access it )
+      for invalid username it take less time if password is wrong because it does not check for password
+      take list from python script and paste it into the intruder payload list
+      change resource pool to custom with 1 entry at a time  
+   
+      >> give list of username to intruder tab in burp and find valid username (which has different different response than other usernames)
+       ( it gives response of "Invalid username or password" but actually it should give response "Invalid username or password." )
+         username = carlos 
+      >> Now we got username so change it and give database of password from website to intruder tab and find valid password (which has different status code  than other passwords)
+         password = methew  
+
+NOTE: For automation for this lab use HYDRA tool 

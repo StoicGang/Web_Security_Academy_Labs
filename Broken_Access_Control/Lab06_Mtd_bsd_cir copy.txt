@@ -1,0 +1,14 @@
+Lab #6: Method based access control can be circumvented 
+
+    Target Goal: 
+         Find the admin panel and delete user carlos       
+   
+    Credentials: 
+        weiner :> peter
+        administrator :>  admin
+   
+    Analysis: 
+      >> Login using the administrator user and be aware of how upgrade and downgrade requests are made           
+      >> Login using our regular account of wiener             
+      >> Change the session cookies of regular user with the cookies of the administrator user 
+      >> Then change the same request from 'POST' to 'GET' 

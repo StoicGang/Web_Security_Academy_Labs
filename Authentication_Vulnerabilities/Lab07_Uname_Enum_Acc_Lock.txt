@@ -1,0 +1,20 @@
+Lab #2: Username Enumeratiion via account lock 
+
+    Target Goal: 
+         Exploit logic flaw to enumerater valid username adn thus brute force user's password 
+    
+    Credentials: 
+      Our      :>   weiner:peter
+      Target   :>   Carlos
+    
+    Analysis: 
+       Wordlist for username and password are given
+       use cluster bomb 
+    
+       >> give list of username to intruder tab in burp and find valid username (which has different different response than other usernames)
+        ( it gives response of "Invalid username or password" but actually it should give response "Invalid username or password." )
+          username = acid 
+       >> Now we got username so change it and give database of password from website to intruder tab and find valid password (which has different status code  than other passwords)
+          password = superman   
+
+NOTE: For automation for this lab use HYDRA tool 

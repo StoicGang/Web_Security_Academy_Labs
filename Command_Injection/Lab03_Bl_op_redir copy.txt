@@ -1,0 +1,19 @@
+Lab #3: Blind OS command injection with output redirection
+
+      Target Goal: 
+           Exploit Blind command injection and redirect the output from the whoami command to the var/www/images   
+      
+      Analysis: '
+          Steps: 
+              1. Confirm the blind command injection 
+                 parameter email is vulnerable to command injection
+              2. check where images are stored
+              3. Redirect the output to the file 
+              4. Check if file is created or not 
+
+          >> fill the feedback form and intersept the request in burp
+          >> There are three different variables  
+          >> add encoded 'whoami' to any of the variables
+          >> send images request to repeater in burpsuite 
+          >> Again in the feedback form request write ' & whoami > /var/www/images/ouput4.txt' 
+          >> Again in place of image id in image request replace output.txt and you are good to go 

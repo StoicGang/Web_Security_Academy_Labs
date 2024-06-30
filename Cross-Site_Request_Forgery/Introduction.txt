@@ -1,0 +1,115 @@
+#Cross Site Request Forgery
+
+      ************************************** What is the cross-site request forgery ***************************************************
+
+           • CSRF is a type of security vulnerability where an attacker tricks a user's web browser into performing an unwanted action on a trusted 
+             site where the user is authenticated. Thiis achieved by exploiting the fact that thbrowser includes any relevant cookie(credentials)
+             automatically, allowing the attacker tforge and submit unauthorised requests obehalf of the user (through the browser)
+           • CSRF is an attack where the attacker causes the victim user to carry out an action unintentionally while that user is authenticated.
+     
+           CSRF Conditions 
+              • For a CSRF attack to be possible, three key conditions must be in place:
+                  • A relevant action 
+                  • cookie-based session handling 
+                  • No unpredicable request parameters 
+           
+           • Csrf Cycle
+                {Attacker}      =>(Sends Malicious link to the user)=>      {Authenticated User}      =>(User clicks fraudulent link)=>       {Server}
+
+                Example:
+                  Bank Fraud 
+                    • The victim is already logged on to his bank website. The attackers create a crafted malicious link and email it to the victim.
+                    • The victim opens the email in the same browser.
+                    • Once clicked, the malicious link enables the auto-transfer of the amount from the victim's browser to the attacker's bank account.
+            
+            
+            **types**
+
+               1. Traditional CSRF 
+                 The victim is tricked into submitting a form without realising the associated data like cookies, URL parameters, etc
+               2. XMLHttpRequest CSRF
+                 An asynchronous CSRF exploitation occurs when operations are initiated without a complete page request-response cycle. This is typical of 
+                 contemporary online apps that leverage asynchronous server communication (via XMLHttpRequest or the Fetch API) and JavaScript to produce more dynamic user interfaces
+               3. Flash-based CSRF 
+                 The technique of conducting a CSRF attack by taking advantage of flaws in adove flash player components. Internet applications with features like interactive content, 
+                 video streaming, and intricate animations
+
+
+      ************************************** Impact of CSRF attack ********************************************************************
+
+           • Depends on the functionality in the application that is being exploited
+              • Confidentiality — it can be None / Partial (Low) / High
+              • Integrity — usually either Partial or High
+              • Availability — can be None / Partial (Low) / High
+           • Remote code execution on the server
+
+
+      ************************************** How to find the cross-site request forgery Vulnerability *********************************
+
+           • Depends on the perspective of the tester   
+               
+               1. Black-Box Testing 
+                  • Map the application
+                     • Review all the key functionality in the application
+                  • Identify all application functions that satisfy the following three conditions
+                     • A relevant action
+                     • Cookie-based session handling
+                     • No unpredictable request parameters
+                  • Create a PoC script to exploit CSRF
+                     • GET request: <img> tag with src attribute set to vulnerable URL
+                     • POST request: form with hidden fields for all the required parameters and the target set to vulnerable URL
+
+               2. White-Box Testing
+                  • Identify the framework that is being used by the application
+                  • Find out how this framework defends against CSRF attacks
+                  • Review code to ensure that the built in defenses have not been disabled
+                  • Review all sensitive functionality to ensure that the CSRF defense has been applied
+
+
+      ************************************** How to prevent CSRF vulnerability ********************************************************
+
+           • Primary Defense - CSRF Tokens 
+                How should CSRF tokens be generated?
+                    • Unpredictable with high entropy, similar to session tokens
+                    • Tied to the user's session
+                    • Validated before the relevant action is executed
+                
+                How should CSRF tokens be transmitted 
+                    • Hidden field of an HTML form that'is submitted using a POST method
+                    • Custom request header
+                    • Tokens submitted in the URL query string are less secure
+                    • Tokens generally should not be transmitted within cookies
+                
+                How should CSRF tokens be validated?
+                    • Generated tokens should be stored server-side within the user's session data
+                    • When performing a request, a validation should be performed that verifies that the submitted token matches the value that is stored in the user's session
+                    • Validation should be performed regardless of HTTP method or content type of the request
+                    • If a token is not submitted, the request should be rejected
+           
+           • Additinal Defense - SameSite Cookies  (can have value like Strict, Lax, Secure)
+               The SameSite attribute can be used to control whether the cookies are submitted in the cross=site requests.
+           
+           • Inadequate Defense - Referer Header 
+               The Referer HTTP request header contains an absolute or partial address of the page making the request.
+                    • Referer headers can be spoofed
+                    • The defense can usually be bypassed:
+                       • Example #1 — if it's not present, the application does not check for it
+                       • Example #2 —the referrer header is only checked to see if it contains the domain and exact match is not made.
+
+
+      ************************************** Resources ********************************************************************************
+
+           • Web Security Academy - CSRF
+             https://portswigger.net/web-security/csrf 
+
+           • Web Application Hacker's Handbook
+             • Chapter 13 - Attacking Users: Other Techniques (pgs. 504—511)
+           
+           • OWASP - CSRF
+             https://owasp.org/www-community/attacks/csrf
+           
+           • Cross-Site Request Forgery Prevention Cheat Sheet
+             https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forqery_Prevention_Cheat_Sheet.html
+           
+           • Reviewing Code for Cross-Site Request Forgery Issues Overview
+             https://owasp.orq/www-proiect-code-review-guide/reviewinq-code-for-csrf-issues 

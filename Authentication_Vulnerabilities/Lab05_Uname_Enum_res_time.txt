@@ -1,0 +1,20 @@
+Lab #5: Username Enumeration via response timings
+
+    Target Goal: 
+         Enumerate a valid username to access the application
+    
+    Credentials: 
+      Our      :>   weiner:peter
+    
+    Analysis: 
+     Wordlist for username and password are given
+     it locks login attempts after 3rd attempt (change x-forwarded for x so that we can again access it )
+     for invalid username it take less time if password is wrong because it does not check for password
+    
+     >> give list of username to intruder tab in burp and find valid username (which has different different response than other usernames)
+      ( it gives response of "Invalid username or password" but actually it should give response "Invalid username or password." )
+        username = alaska
+     >> Now we got username so change it and give database of password from website to intruder tab and find valid password (which has different status code  than other passwords)
+        password = nicole 
+
+NOTE: For automation for this lab use HYDRA tool 

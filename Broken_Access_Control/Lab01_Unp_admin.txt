@@ -1,0 +1,9 @@
+Lab #1: Unprotected admin functionality
+
+     Target Goal:
+          Find the admin panal and delete user carlos       
+       
+     Analysis:
+       
+         url/my-account/administrator-panal
+          ..you will get access to admin panal and delete user carlos

@@ -1,0 +1,7 @@
+Lab #5: Blind SSRF with Shellshock exploitation
+
+     Target Goal:
+         Use this fucntionality to perform the Blind SSRF attack against the internal server in the  192.168.0.x range on port 8080. In the blind attack, use a Shellshock payload against the internal server to exfiltrate the name of OS user
+
+     Analysis:
+         Vulnerable Feature: Stock check Functionality

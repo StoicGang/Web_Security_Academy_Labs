@@ -1,0 +1,15 @@
+Lab #11: Insecure direct object reference
+
+    Target Goal:   
+       Retrieves the carlos's password  and compromise his account       
+   
+    Credentials: 
+         weiner :> peter
+         administrator :> admin
+   
+    Analysis: 
+      Extra option is given as 'live chat'
+      >> Login with the regular user's  username and password
+      >> check the request to live chat in burpsuite 
+      >> change the documentid parameter to '1.txt' 
+      >> Login with account of carlos  

@@ -1,0 +1,11 @@
+Lab #5: SSRF with filter bypass via open redirection vulnerability 
+
+     Target Goal:
+          change the stock check URL to access the admin interface at http://192.168.0.12:8080/admin  and delete the user carlos
+    
+     Analysis:
+         Vulnerable Feature: Stock check Functionality
+         >> New functionality is next product  
+         >> Send the check stock URL  and next product to the repeater 
+         >> Change the 'stockApi' variable to to the value of the path given in the request of the new product and change the 'path' variable to 'http://192.168.0.12:8080//admin'
+         >> Change the 'stockApi' parameter to http://192.168.0.12:8080//admin/delete?username=carlos  to delete the user carlos

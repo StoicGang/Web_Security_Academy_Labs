@@ -1,0 +1,8 @@
+Lab #1: file path traversal, simple case class
+
+     Target Goal:
+          retrieves the target control of the /etc/passwd file
+     
+     Analysis:
+       /var/www/images/65.jpg
+       /etc/passwd

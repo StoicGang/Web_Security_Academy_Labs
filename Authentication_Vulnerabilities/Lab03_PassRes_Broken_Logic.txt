@@ -1,0 +1,15 @@
+Lab #3: Password reset broken logic
+
+   Target Goal: 
+         Exploit the password reset functionality to reset the Carlos's password
+   
+   Credentials: 
+     Our      :>   weiner:peter
+     Target   :>   Carlos
+   
+   Analysis: 
+     
+     >> Login to given credentials
+     >> reset the password for user weiner 
+     >> Manipulate the reset password link in burp (Remove forgot password token from both confirmation and the original one)
+     >> Login using the username:carlos and password:(reseted password for user weiner)

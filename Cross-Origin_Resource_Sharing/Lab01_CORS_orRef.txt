@@ -1,0 +1,19 @@
+Lab #1: CORS vulnerability with basic origin reflection 
+      
+      Target Goal: 
+           Exploit CORS misconfiguration to retrieve the administrator's API key 
+           
+      Credentials: 
+          Our   :>   weiner:peter
+
+      Analysis: 
+            
+            >> Testing for CORS misconfiguration 
+               1. Change the origin to an arbitrary value //true
+               2. 
+            >> Login to the regular account 
+            >> Put the html script into the body at sever given by the portswigger 
+            >> In Logs you can see the api key and then submit 
+      
+      NOTE: usage of the script is as ( 5555 is the port on which the ip is running) 
+             python -m SimpleHTTPServer 5555 

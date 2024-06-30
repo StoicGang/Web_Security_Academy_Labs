@@ -1,0 +1,14 @@
+Lab #05 : Low level Logic Flaw
+
+     Target Goal: 
+          Exploit logic flow to buy the lightweight l33t leather jacket
+     
+     Credentials: 
+         weiner :> peter
+     
+     Analysis:
+       >> login using the user Credentials
+       >> Add the item to cart (in which there is the new option for coupon code)
+       >> Use Intruder in burpsuite 
+       >> Find the the value to which the cart value becomes to negative value
+       >> Use maths so that the value comes in the range of our credit score 

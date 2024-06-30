@@ -1,0 +1,15 @@
+Lab #8: UID controlled by parameter, with unpredictable UID's
+
+    Target Goal: 
+       Obatain GUID for the user carlos and compromise his account       
+   
+    Credentials: 
+        weiner :> peter
+        administrator :> admin
+   
+    Analysis: 
+      >> Login with the same username and password
+      >> check for the post written by the user 'carlos' 
+      >> This will give you userid or GUID for the user 'carlos' 
+      >> Login with this id as carlos 
+      >> submit the API key 

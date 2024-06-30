@@ -1,0 +1,14 @@
+Lab #1: Username Enumeration via different responses
+
+   Target Goal:
+         Enumerate a valid username to access the application
+   
+   Analysis: 
+    Wordlist for username and password are given 
+   
+    >> give list of username to intruder tab in burp and find valid username (which has different string length than other usernames)
+       username = arkansan
+    >> Now we got username so change it and give database of password from website to intruder tab and find valid password (which has different status code  than other passwords)
+   
+   
+NOTE: For automation for this lab use HYDRA tool 

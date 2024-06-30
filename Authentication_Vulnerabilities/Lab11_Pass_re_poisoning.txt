@@ -1,0 +1,14 @@
+Lab #11: password reset poisoning via middleware
+
+    Target Goal:
+         Exploite the password reset vulnerability to access the carlos's hashed password, crack it and delete it 
+    
+    Credentials: 
+     Our      :>   weiner:peter
+     Target   :>   carlos
+    
+    Analysis: 
+      
+      >> add x-Forwarded-Host header to the script while accessing the forgot password link ( you have to send three requests to repeater)
+      >> you will get cookie token for carlos user in access logs in Exploite_server 
+      >> replace the token and change the password for carlos 

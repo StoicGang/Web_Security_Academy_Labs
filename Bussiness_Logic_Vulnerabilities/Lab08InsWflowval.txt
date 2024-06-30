@@ -1,0 +1,9 @@
+Lab #08 : Insufficient workflow validation
+
+      Target Goal: 
+           Exploit logic flow to purchase the " lightweight l33t leather jacket" 
+      
+      Credentials: 
+          weiner :> peter
+               
+      Analysis:

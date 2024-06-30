@@ -1,0 +1,11 @@
+Lab #3: User role controlled by the request parameter
+
+    Target Goal:  
+       Find the admin panal and delete user carlos       
+   
+    Credentials: 
+       weiner :> peter 
+   
+    Analysis: 
+      >> In the inspect window change the admin cookie to true for the user weiner 
+      >> You will get access to admin panal and delete the user carlos

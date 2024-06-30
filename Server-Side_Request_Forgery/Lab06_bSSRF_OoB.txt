@@ -1,0 +1,11 @@
+Lab #5: Blind SSRF with out-of-band detection  
+
+     Target Goal:
+          Use this functionality to cause an http request to the public BURP COLLOBORATOR server    
+
+     Analysis:
+         Vulnerable Feature: Referer Header when a product page is loaded 
+
+         >> New functionality is next product  
+         >> Send the check stock URL  and next product to the repeater 
+         >> Change the 'Referer' variable to to the value of the link to to your COLLOBORATOR server 

@@ -1,0 +1,15 @@
+Lab #9: UID controlled by parameter, with data leakage in redirect
+
+    Target Goal:    
+         Obatain API key for the user carlos and compromise his account       
+   
+    Credentials: 
+         weiner :> peter
+         administrator :> admin
+         
+    Analysis: 
+      >> Login with the regular user's  username and password
+      >> check the request to login in burpsuite 
+      >> change the userid parameter to 'carlos' 
+      >> you will not be able o see login effect in the browser but in proxy you will get the API key 
+      >> submit the API key 

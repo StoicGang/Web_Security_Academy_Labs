@@ -1,0 +1,9 @@
+Lab #2: Blind OS command injection with time delays
+
+      Target Goal: 
+           Exploit Blind command injection in the feedback function
+      
+      Analysis: 
+           >> fill the feedback form and intersept the request in burp
+           >> There are three different variables  
+           >> add encoded '& sleep 10' to any of the variables

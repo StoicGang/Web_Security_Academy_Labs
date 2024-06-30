@@ -1,0 +1,14 @@
+Lab #8: 2FA broken logic
+
+    Target Goal: 
+         Bypass the 2FA verification and access Carlos's account 
+    
+    Credentials: 
+      Our      :>   weiner:peter
+      Target   :>   carlos
+    
+    Analysis: 
+   
+      >> Login using given credentials and 2FA code 
+      >> manipulate the request login2 and login to get session cookies for carlos
+      >> brute force the 2FA code and paste to get accoun's access 

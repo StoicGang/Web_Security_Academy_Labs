@@ -1,0 +1,9 @@
+Lab #2: Unprotected admin functionality with unpredicatable URL
+
+   Target Goal: 
+      Find the admin panal and delete user carlos       
+  
+   Analysis: 
+  
+     view the source code of the application you will find the javascript code in which you can find the url for admin panal 
+       url + /admin-3qf1r 

@@ -1,0 +1,13 @@
+Lab #7: User ID controlled by the request parameters
+ 
+    Target Goal: 
+         Obatain API key for the user carlos       
+   
+    Credentials: 
+        weiner :> peter
+        administrator :> admin
+   
+    Analysis: 
+      >> Login as the regular user and check the activities 
+      >> Replace username id for the user weiner 
+      >> Replace the username id as carlos and get the API key and put in the field given  

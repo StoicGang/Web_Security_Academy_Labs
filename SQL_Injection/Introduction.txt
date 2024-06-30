@@ -1,0 +1,186 @@
+#SQL Injection
+
+       ********************************* What is the SQL injection *************************************************************************
+           • Vulnerability that consists of an attacker interfering with the SQL queries that an application makes to a database.
+           
+           **types**
+
+              1. In-Band Injection(Clasic)
+                 • In-band SQLi occurs when the attacker uses the same communication channel to both launch the attack and gather the result of the attack
+                 • Retrieved data is presented directly in the application web page
+                 • Easier to exploit than other categories of SQLi
+
+                 **types**  
+
+                  1. Error-based Injection
+                     • Error-based SQLi is an in-band SQLi technique that forces the database to generate an error, giving the attacker information upon which to refine their injection.
+                      
+                     Example:
+                        Input:  www.random.com/app.php?id='
+                        Output: You have an erro in your SQL syntax, check the mannual that corresponds to your MySQL server version...
+                        
+                  2. Union-based Injection
+                     • Union-based SQLI is an in-band SQLi technique that leverages the UNION SQL operator to combine the results of two queries into a single result set
+                      
+                     Example:
+                        Input: www.random.com/app.php?id='UNION SELECT username, password FROM users--
+                        Output: 
+                                carlos
+                                jd389uyrjf98dkr
+                                administrator
+                                89rth39fjk3krjfkjrh8r
+
+              2. Inferential Injection(Blind)
+                 • SQLi vulnerability where there is no actual transfer of data via the web application
+                 • Just as dangerous as in-band SQL injection
+                 • Attacker able to reconstruct the information by sending particular requests and observing the resulting behavior of the DB Server.
+                 • Takes longer to exploit than in-band SQL injection
+
+                 **types** 
+
+                  1. Boolean Injection
+                     • Boolean-based SQLi is a blind SQLi technique that uses Boolean conditions to return a different result depending on whether the query returns a TRUE or FALSE result.
+
+                     Example:
+                       Normal
+                         url:  www.random.com/app.php?id=1
+                         Backend : select title from product where id=1
+                       
+                       Payload #1(FALSE)
+                         url: www.random.com/app.php?id=1 and 1=2
+                         Backend: select title from product where id  =1 and 1=2
+                       
+                       Payload #2(TRUE)
+                         url: www.random.com/app.php?id=1 and 1=1
+                         Backend: select title from product where id  =1 and 1=1
+
+                  2. Time Injection
+                     • Time-based SQLi is a blind SQLi technique that relies on the database pausing for a specified amount of time, then returning the results, indicating a successful SQL query execution.
+                     
+                     Example Query:
+                       If the first character Of the administrator's hashed password is an wait for 10 seconds.
+                          -> response takes 10 seconds first letter is 'a'
+                          -> response doesn't take IO seconds first letter is not 'a'
+
+              3. Out-of-Band Injection
+                 • Vulnerability that consists of triggering an out-of-band network connection to a system that you control.
+                   • Not common
+                   • A variety of protocols can be used (ex. DNS, HTTP)
+
+ 
+       ********************************* How to find the SQL injection *********************************************************************
+           
+           Depends on the perspective of testing   
+
+                1. Black-Box Testing
+                   • Map the application  
+                   • Fuzz the application
+                     • Submit SQL-specific characters such as ' or " , and look for errors or other anomalies 
+                     • Submit Boolean conditions such as OR 1=1 and OR 1=2, and look for differences in the application's response
+                     • Submit payloads designed to trigger time delays when executed within a SQL query, and look for differences in the time taken to respond
+                     • Submit OAST payloads designed to trigger an out-of-band network interaction when executed within an SQL query, and monitor for any resulting interactions
+
+                2. White-Box Testing
+                   • Enable web server logging 
+                   • Enable database logging
+                   • Map the application
+                     • Visible functionality in the application  
+                     • Regex search on all instances in the code that talk to the database 
+                   • Code review!
+                     • Follow the code path for all input vectors 
+                   • Test any potential SQLi vulnerabilities  
+
+
+       ********************************* How to Exploit the SQL injection ******************************************************************
+
+             1. Error-based SQLi
+                   • Submit SQL-specific characters such as ' or ", and look for errors or other anomalies
+                   • Different characters can give you different errors
+
+             2. Union-based SQLi
+                   There are two rules for combining the result sets of two queries by using UNION:
+                      • The number and the order Of the columns must be the same in all queries
+                      • The data types must be compatible
+                   
+                   Exploitation:
+                      • Figure out the number of columns that the query is making
+                      • Figure the data types of the columns (mainly interested in string data)
+                      • Use the UNION operator to output information from the database
+
+                   Determining the number of columns required in an SQL injection UNION attack using ORDER BY:
+                      • Incrementally inject a series of ORDER BY clauses until you get an error or observe a different behavior in the application
+                   
+                   Determining the number of columns required in an SQL injection UNION attack using NULL VALUES:
+                      • Incrementally inject a series of UNION SELECT payloads specifying a different number of null values until you no longer get an error
+
+                   Finding columns with a useful data type in an SQLi UNION attack 
+                       • Probe each column to test whether it can hold string data by submitting a series of UNION SELECT payloads that place a string value into each column in turn
+             
+             3. Boolean-based blind SQLi
+                   • Submit a Boolean condition that evaluates to False and not the response
+                   • Submit a Boolean condition that evaluates to True and note the response
+                   • Write a program that uses conditional statements to ask the database a series of True / False questions and monitor response
+
+             4. Time-based blind SQLi
+                   • Submit a payload that pauses the application for a specified period of time
+                   • Write a program that uses conditional statements to ask the database a series of TRUE / FALSE questions and monitor response time
+             
+             5. Out-of-Band SQLi 
+                   • Submit OAST payloads designed to trigger an out-of-band network interaction when executed within an SQL query, and monitor for any resulting interactions
+                   • Depending on SQL injection use different methods to exfil data
+
+
+       ********************************* What is the impact of the SQL injection ***********************************************************
+
+           • Unauthorized access to sensitive data
+               • Confidentiality — SQLi can be used to view sensitive information, such as application usernames and passwords
+               • Integrity SQLi can be used to alter data in the database
+               • Availability SQLi can be used to delete data in the database
+           • Remote code execution on the operating system
+          
+       
+       ********************************* How to prevent the SQL injection ******************************************************************
+            
+            • Primary Defenses:
+                • Option 1: Use Of Prepared Statements (Parameterized Queries)
+                          The construction of the SQL statement is performed in two steps:
+                           • The application specifies the query's structure with placeholders for each user input
+                           • The application specifies the content of each placeholder
+
+                • Option 2: Use Of Stored Procedures (Partial)
+                          • A stored procedure is a batch of statements grouped together and stored in the database
+                          • Not always safe from SQL injection, still need to be called in a parameterized way
+
+                • Option 3: Whitelist Input Validation (Partial)
+                          • Defining what values are authorized. Everything else is considered unauthorized
+                          • Useful for values that cannot be specified as parameter placeholders, such as the table name.
+
+                • Option 4: Escaping All User Supplied Input (Partial)
+                          • Should be only used as a last resort   
+
+            • Additional Defenses:
+                • Also: Enforcing Least Privilege
+                       • The application should use the lowest possible level of privileges when accessing the database
+                       • Any unnecessary default functionality in the database should be removed or disabled
+                       • Ensure CIS benchmark for the database in use is applied
+                       • All vendor-issued security patches should be applied in a timely fashion
+
+                • Also: Performing Whitelist Input Validation as a Secondary Defense
+
+
+       ********************************* Resources *****************************************************************************************
+           
+            • Web Security Academy - SQL Injection
+              https://portswigger.net/web-security/sql-iniection
+
+            • Web Application Hacker's Handbook
+              • Chapter 9 - Attacking Dato Stores
+
+            • OWASP - SQL Injection
+              https://owasp.org/www-community/attacks/SQL_Injection
+            
+            • OWASP — SQL Prevention Cheat Sheet
+              https://cheatsheets.owasp.org/cheatsheets/SQL_Injection_Cheat_Sheet.html
+
+            • PentestMonkey — SQL Injection
+              http://pentestmonkey.net/cateqory/cheat-sheet/sql-iniection

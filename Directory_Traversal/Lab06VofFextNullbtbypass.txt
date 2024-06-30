@@ -1,0 +1,7 @@
+Lab #6 : File path traversal. Validation of file extensions with null byte bypass
+
+     Target Goal:
+          Retrieve the contents of the /etc/passvd file.
+     
+     Analysis:
+        ../../../etc/passwd%0048.jpg 

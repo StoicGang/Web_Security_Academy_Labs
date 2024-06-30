@@ -1,0 +1,16 @@
+Lab #9: Brute-forcing a stay-logged-in cookie
+
+     Target Goal:
+          Obtain and brute force the carlos's cookies to gain access to the account 
+     
+     Credentials: 
+     
+      Our      :>   weiner:peter
+      Target   :>   carlos
+     
+     Analysis: 
+     
+      base64(username:md5(password))
+      base64(carlos:md5(password))
+     
+NOTE:use payload processing so that you can bruteforce the in desired form 

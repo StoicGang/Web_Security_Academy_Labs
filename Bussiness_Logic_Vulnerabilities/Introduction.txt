@@ -1,0 +1,128 @@
+ #Business Logic Vulnerabilities
+
+
+    *********************************** WHAT ARE BUSINESS LOGIC VULNERABILITIES? ***********************************
+          Business Logic Vulnerabilities are flaws in the design and implementation of an application that allows an attacker to elicit unintended behavior.
+    
+          ...................................................Examples.........................................................
+    
+         :> 1.Example 1- Change Another User's Password
+    
+              i) Functionality
+                 The application has a password change for end users and administrators.
+                  • End users need to fill out the username, existing password, new password and confirm new password fields.
+                  • Administrators only need to fill out the username, new password and confirm new password fields.
+               
+              ii) Assumption
+                  The client-side interface presented to users and administrators is different but the password change is controlled for both users by the same function.
+                
+              iii) Code 
+                   String existingPassword = request.getParameter("existingPassword");
+                   
+                      if (null existingPassword) {
+                         trace("OId password not supplied, must be an administrator");
+                         return true;
+                      }
+                         else
+                         {
+                           trace("Verifying user's old password"); 
+                         }
+                 ...
+              
+              iv) Attack 
+                  A regular user submits a request to change the another user's password by simply not suppliying the existing password.
+         
+         :> 2.Example 2 — Bypass Checkout Functionality
+          
+              i) Functionality
+                 The application has a "place an order" functionality that follows the
+                 
+                 following stages:
+                   • Browse the product catalog and add items to the shopping basket.
+                   • Return to the shopping basket and finalize the order.
+                   • Enter the payment.
+                   • Enter delivery information.
+              
+              ii) Assumption
+                  The developers assumed that users would always access the stages in the intended sequence.
+              
+              iii) Attack
+                   The user proceeds directly from stage 2 to stage 4, finalizing the order for delivery without paying for the order
+                    • Browse the product catalog and add items to the shopping basket.
+                    • Return to the shopping basket and finalize the order.  |
+                    • Enter the payment.   (No Payment window)               |
+                    • Enter delivery information.                          <-- 
+    
+         :> 3.Example 3 — Beating a Business Limit
+         
+              i) Functionality
+                 A banking application allows users to transfer funds between bank accounts. As a precaution against fraud, the application prevents users from transferring a value greater than $10,000.
+             
+              ii) Assumption
+                  The developers put a check in place to ensure that no transaction greater than allowed to go through.
+              
+                    bool CAuthCheck::RequiresApprova1(int amount) {
+                    if (amount <= m_apprThresh01d)
+                        return false;
+                    else return true; }
+            
+              iii) Attack
+                   The developers overlooked the possibility that a user would attempt to process a transfer for a negative amount. Any negative number would clear the approval test because it is less than the threshold value.
+                   
+                   Therefore, a user who wants to transfer $20,000 from account A to account B could simply initiate a transfer -$20,000 from account B to account A bypassing the antifraud defense.
+    
+         :> 4.Example 4— Cheating on me Discounts
+          
+              i) Functionality
+                 An e-commerce website allows users to order software products and qualify for bulk discounts if a suitable bundle of items was purchased.
+                 The following are the steps involved in the bulk discount functionality:
+                    1. User adds items in basket.
+                    2. If one of the items qualifies fora bulk discount, a discount is applied on the entire cart.
+                    3. User purchases order.
+              
+              ii) Assumption
+                  Users will purchase the chosen bundle after the discount is applied.
+                 
+              iii) Attack
+                   User can exploit this logic flaw by performing the following steps:
+                      1.User adds items in basket including item that gives the user a bulk discount.
+                      2.The discount is applied on the entire cart.
+                      3.User goes back to the cart and removes the item that entitled him to a discount.
+                      4.Although the item is removed, the discount is still approved, and the user purchases thé order at a discounted price.
+    
+    
+    *********************************** Impact of Business Logic Vulnerabilities ***********************************
+      
+         • The impact is highly variable and depends on the functionality that contains the business logic flaw.
+             • Confidentiality — Access to other users' data.
+             • Integrity — Access to update other users' data
+             • Availability — Access to delete users and their data.
+    
+    
+    *********************************** How to Find & Exploit Business Logic Vulnerabilities ***********************
+    
+         • Map the application. Make note of each and every component in the application and how it operates.
+             • If you have access to the code, review the code responsible for each component.
+         • For each component determine:
+             • The potential business flow.
+             • The assumptions that could have been made by the developers / architects during the design phase.
+         • Test each component for all possible use cases that are outside of the intended business flow.
+    
+    
+    *********************************** Preventing Business Loglc-Vulnerabilities **********************************
+    
+         • Ensure that there is proper documentation of the application's design that outlines every assumption that the designer(s) made.
+         • Mandate that all source code is properly commented and includes the following items:
+             • The purpose and intended use of each code component.
+             • The assumptions made by each component about anything that is outside of its direct control.
+             • References to all client-side code that uses the component.
+         • Write code as clear as possible
+         • Perform security-focused code reviews of the application's design.
+    
+    
+    *********************************** Resources ******************************************************************
+      
+         • Web Security Academy — Bu?iness Logic Vulnerabilities
+            https://portswigger.net/web-security/logic-flaws
+         • Web Application Hacker's Handbook
+            Chapter 11 — Attacking Application Logic

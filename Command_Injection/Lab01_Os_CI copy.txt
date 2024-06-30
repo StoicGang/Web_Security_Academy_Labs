@@ -1,0 +1,11 @@
+Lab #1 OS command injection, simple case
+
+      Target Goal: 
+           Exploit command injection to execute the whoami command 
+      
+      Analysis: 
+           >> change productid variable from '1' to '1 & whoami #' (send the request after modifying it by using (ctrl + u)[1&whoami#])
+           >> To check the details inside of the command which is causing the cammand injection
+              .> remove hash and use (ctrl + u) 
+              .> get the file path in the response
+              .> Paste it in the request after whoami command
