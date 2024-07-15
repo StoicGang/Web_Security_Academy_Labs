@@ -3,7 +3,7 @@ for i in range(150):
     if i % 3:
         print('carlos')
     else:
-        print('weiner')
+        print('wiener')
 
 print('****************Following are the passwords*******************')
 with open("passwords.txt", 'r') as file:

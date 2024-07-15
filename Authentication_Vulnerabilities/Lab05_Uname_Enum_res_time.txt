@@ -15,7 +15,7 @@ Lab #5: Username Enumeration via response timings
     
      >> give list of username to intruder tab in burp and find valid username (which has different different response than other usernames)
       ( it gives response of "Invalid username or password" but actually it should give response "Invalid username or password." )
-        username = asia
+        username = carlos
      >> Now we got username so change it and give database of password from website to intruder tab and find valid password (which has different status code  than other passwords)
         password = killer 
 

@@ -9,7 +9,7 @@ Lab #6: Broken brute-force protection, IP block
    
    Analysis: 
       Wordlist for username and password are given
-      it locks login attempts after 3rd attempt (change x-forwarded for x so that we can again access it )
+      it locks login attempts after 3rd attempt (add "x-forwarded-for : x "so that we can again access it )
       for invalid username it take less time if password is wrong because it does not check for password
       take list from python script and paste it into the intruder payload list
       change resource pool to custom with 1 entry at a time  
