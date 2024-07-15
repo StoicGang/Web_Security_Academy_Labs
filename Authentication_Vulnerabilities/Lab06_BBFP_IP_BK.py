@@ -6,15 +6,15 @@ for i in range(150):
         print('weiner')
 
 print('****************Following are the passwords*******************')
-with open('password.txt', 'r') as f:
-    lines = f.readlines()
+with open("passwords.txt", 'r') as file:
+    lines = file.readlines()
 
 i=0
 for pwd in lines:
     if i % 2:
-        print("pwd.strip('\n')")
+        print(pwd.strip('\n'))
     else:
         print("peter")
-        print("pwd.strip('\n')")
+        print(pwd.strip('\n'))
         i = i + 1
     i = i + 1
