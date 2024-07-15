@@ -8,13 +8,15 @@ Lab #5: Username Enumeration via response timings
     
     Analysis: 
      Wordlist for username and password are given
-     it locks login attempts after 3rd attempt (change x-forwarded for x so that we can again access it )
+     it locks login attempts after 3rd attempt (add X-Forwarded-For: x{where x=1,2,3,4...} so that we can again access it )
      for invalid username it take less time if password is wrong because it does not check for password
+     for given credentials weiner change the password and increase the length (you will see that the response time is getting increased)
+     Use ATTACK TYPE: pitchfork  ( one for "X-Forwarded-For" and another for "username")
     
      >> give list of username to intruder tab in burp and find valid username (which has different different response than other usernames)
       ( it gives response of "Invalid username or password" but actually it should give response "Invalid username or password." )
-        username = alaska
+        username = asia
      >> Now we got username so change it and give database of password from website to intruder tab and find valid password (which has different status code  than other passwords)
-        password = nicole 
+        password = killer 
 
 NOTE: For automation for this lab use HYDRA tool 
