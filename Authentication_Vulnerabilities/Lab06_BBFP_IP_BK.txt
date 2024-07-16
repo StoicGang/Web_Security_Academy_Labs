@@ -10,8 +10,16 @@ Lab #6: Broken brute-force protection, IP block
    Analysis: 
       Wordlist for username and password are given
       it locks login attempts after 3rd attempt (add "x-forwarded-for : x "so that we can again access it )
-      for invalid username it take less time if password is wrong because it does not check for password
+      If three continous incorrect attempts are made server blocks the ip for 1 minute
       take list from python script and paste it into the intruder payload list
+          {list
+              valid usr      valid password 
+              invalid usr    trial 01
+              invalid usr    trial 02    
+              valid usr      valid password
+              .
+              .
+              .}
       change resource pool to custom with 1 entry at a time  
    
       >> give list of username to intruder tab in burp and find valid username (which has different different response than other usernames)
