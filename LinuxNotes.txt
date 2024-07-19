@@ -62,7 +62,7 @@ FHS(Standard directory structure):
         -Top-level directory and the starting point of the file system hierarchy.
     2./bin (Binary Binaries):
         -Stores essential binary executables (commands) that are required for system recovery and repair.
-        -Common command-line utilities like `ls`, `cp`, and `mkdir` are found here.
+        -Common command-line utilities like 'ls', 'cp', and 'mkdir' are found here.
     3./boot (Boot loader):
         -Contains files related to the system's boot process, including the kernel image, initial ramdisk(initramfs),
          and bootloader configuration files(GRUB).
@@ -71,7 +71,7 @@ FHS(Standard directory structure):
         -Device nodes are used to communicate with and control hardware components.
     5./etc (Configuration files):
         -Stores system-wide configuration files for various system services and applications.
-        -Contains files like `/etc/fstab`, `/etc/passwd`, and `/etc/hosts.
+        -Contains files like '/etc/fstab', '/etc/passwd', and '/etc/hosts.
     6./home (User home directories):
         -Regular users are typically located here.
         -Each user has their own home directory, which contains their personal files and settings.
@@ -113,3 +113,318 @@ FHS(Standard directory structure):
     18./var (Variable Data):
         -Stores variable data files, such as log files, spool files, and temporary data created by system services and applications.
         -Contains subdirectories like /var/log and /var/run.
+
+Navigating the file system:
+
+   1. cd (Change Directory):
+     -Used to change the current working directory.
+     -Syntax: 'cd [directory_path]'
+     -Examples:
+      'cd /home/user': Changes to the "/home/user" directory.
+      'cd ..': Changes to the parent directory.
+      'cd ~': Changes to the user's home directory.
+
+   2. ls (List Files and Directories):
+     -Displays a list of files and directories in the current directory.
+     -Syntax: 'ls [options] [directory_path]'
+     -Common options:
+     -'-l': Long format, providing detailed information about files.
+     -'-a': Show hidden files (files starting with a dot).
+     -'-h': Human-readable file sizes.
+     -Examples:
+     -'ls': Lists files and directories in the current directory.
+     -'ls -l/home/user': Lists files in the "/home/user" directory in long format.
+     -'ls -a': Lists all files, including hidden ones.
+
+   3. pwd (Print Working Directory):
+     -Displays a working directory's full path 
+     -Syntax: 'pwd'
+     -Example: 'pwd'
+
+   4. mkdir (Make Directory):
+     -Creates a new directory in the current location.
+     -Syntax: 'mkdir [directory_name]'
+     -Example: 'mkdir myfolder'
+   
+   5. rmdir (Remove Directory):
+     -Deletes an empty directory.
+     -Syntax: 'rmdir [directory_name]
+     -Example: 'rmdir myfolder'
+   
+   6. touch (create empty file):
+     -Creates a new empty file in the current directory.
+     -Syntax: 'touch [file_name]'
+     -Example: 'touch myfile.txt'
+
+   7. cp (Copy):
+     -Copies files or directories from one location to another.
+     -Syntax: & cp [options] [source] [destination] &
+     -Common options:
+     -'-r'or'R':Recursively copy directories and their contents.
+     -Example: 'cp filel.txt /path/to/destination'
+
+   8. mv (Move/Rename):
+     -Moves files or directories to a new location or renames them.
+     -Syntax: 'mv [options] [source] [destination]'
+     -Example:
+     -'mv filel.txt /new/path': Moves "filel.txt" to a new location.
+     -'mv oldfile.txt newfile.txt': Renames "oldfile.txt" to "newfile.txt."
+
+   9. rm (Remove/Delete):
+     -Deletes files or directories.
+     -Syntax: 'rm [options] [file_or_directory] '
+     -Common options:
+     -'-r' or '-R': Recursively delete directories and their contents.
+     -'-f':Force removal without confirmation.
+     -Example:
+     -'rm file.txt': Deletes the "file.txt" file.
+     -'rm -rf directory': Recursively deletes the "directory" and its contents without confirmation.
+
+   10. find (Find Files and Directories):
+     -Searches for files and directories based on specified criteria.
+     -Syntax: 'find [starting_directory] [options] [search_criteria]
+     -Example:
+     -'find /home/user -name ".txt"'. Searches for all files with a ".txt" extension under "/home/user."
+
+Creating Files:
+   1. touch (create empty file):
+     -The 'touch' command is primarily used to update file timestamps, but it can also create empty files if the specified file doesn't exist.
+     -To create an empty file, simply provide the desired file name as an argument to ' touch '.
+     For example:
+     'touch myfile.txt' this will create an empty file named 'myfile.txt' in the current directory.
+   
+   2. using 'echo':
+     -The 'echo' command is commonly used to print text to the terminal. However, you can also use it to create and populate a file.
+     -To create a file with content using use the redirection ( * > ) operator to send the output to a file. For example:
+       echo "Hello, Linux!" > greeting.txt (This command creates a file named "greeting.txt" with the text "Hello, Linux!" inside it.)
+
+   3. Using Text Editors:
+     -Text editors like 'nano', 'vim', and 'gedit' allow you to create and edit files interactively.
+     -Open a text editor by typing its name followed by the desired file name:
+       nano mytextfile.txt
+     -You can then type or paste content into the editor and save the file when you're done.
+   
+Deleting Files:
+   1. Using 'rm' (Remove):
+     -The vrm' command is used to remove files and directories.
+     -To delete a file, simply provide the file name as an argument to 'rm'. 
+     For example:
+      rm myfile.txt
+     this will delete the "myfile.txt" file.
+     -To delete multiple files, you can list them as arguments:
+      rm myfile.txt myotherfile.txt
+     -To remove a directory and its contents, use the (recursive) option:
+       rm -r myfolder
+      Be cautious with the option, as it will delete the specified directory and everything inside it.
+    
+   2. Using 'unlink':
+     -The command is used to remove a single file.
+     -To delete a file using 'unlink' , provide the file name as an argument:
+       unlink myfile.txt (This will remove the "myfile.txt" file.)
+     
+   3. Using a File Manager:
+     -In graphical file managers like Nautilus (GNOME), Dolphin (KDE), or Thunar (Xfce), you can
+      delete files by right-clicking on them and selecting the "Delete" or "Move to Trash" option.
+     -Deleted files are typically moved to the trash/recycle bin and can be restored before permanent deletion.
+
+Copying and Moving Files:
+   1. 'cp' (Copy):
+     – Usage: 'cp [options] source destination'
+     – Description: The 'cp' command is used to copy files or directories from a source location to a destination location. It creates a duplicate of the source file or directory in the destination location while leaving the original intact.
+     
+   Common options for 'cp':
+     – '-r' or '-R': Used for copying directories and their contents recursively. Without this option, 'cp' will not copy directories.
+     – '-i': Interactive mode. Prompts for confirmation before overwriting an existing destination file.
+     – '-u': Copies only when the source file is newer than the destination file or when the destination file is missing.
+     – '-v': Verbose mode. Displays each file as it’s copied along with its destination.
+     
+   Example usages:
+     – 'cp file1.txt file2.txt': Copies 'file1.txt' to 'file2.txt'.
+     – 'cp -r directory1/ directory2/': Copies the entire 'directory1' and its contents into 'directory2'.
+     
+   2. 'mv' (Move or Rename):
+     – Usage: 'mv [options] source destination'
+     – Description: The 'mv' command is used to move files or directories from a source location to a destination location. It can also be used to rename files or directories by specifying a different destination name.
+     
+   Common options for 'mv':
+     – '-i': Interactive mode. Prompts for confirmation before overwriting an existing destination file.
+     – '-u': Moves only when the source file is newer than the destination file or when the destination file is missing.
+     – '-v': Verbose mode. Displays each file as it’s moved along with its destination.
+     
+   Example usages:
+     – 'mv file1.txt file2.txt': Renames 'file1.txt' to 'file2.txt'.
+     – 'mv file1.txt directory/': Moves 'file1.txt' into the 'directory'.
+     – 'mv directory1/ directory2/': Moves 'directory1' into 'directory2' (renames if 'directory2' already exists).
+     
+   Important Notes:
+     – When using 'cp' or 'mv', you can use relative or absolute paths for the source and destination. Relative paths are based on your current working directory, while absolute paths start from the root directory (/).
+     – Be cautious when using these commands, especially with the '-r' (recursive) option, as it can overwrite files and directories if not used carefully.
+     – Always double-check your paths and ensure you have the necessary permissions to perform the operations.
+
+File Permissions:
+
+   File permissions determine who can perform specific actions (read, write, execute) on a file or directory. Permissions are assigned to three categories of users: the file owner, the group associated with the file, and others (everyone else).
+      
+      – Read (r): Allows users to view the contents of a file or list the contents of a directory.
+      
+      – Write (w): Permits users to modify the file or create and delete files within a directory.
+      
+      – Execute (x): Grants users permission to execute a file (e.g., run a script) or access the contents of a directory.
+      
+      File permissions are represented by a 10-character string, where the first character indicates the file type (e.g., '-' for regular files, 'd' for directories), 
+      and the next nine characters are divided into three sets of three characters each. Each set represents permissions for the file owner, the group, and others, respectively.
+      For example, the permission string “rw-r–r–” means the file owner has read and write permissions, while the group and others have only read permissions.
+      
+   Changing File Permissions with 'chmod':
+      
+      The 'chmod' command is used to modify file permissions. It can be applied in two ways: symbolic notation and octal notation.
+      
+      Symbolic Notation:
+      – Symbolic notation allows you to modify permissions symbolically without needing to specify the existing permissions explicitly.
+      – The syntax is: 'chmod [permissions] [file]'
+      – For example:
+       – 'chmod +x file.txt': Adds execute permission to “file.txt.”
+       – 'chmod u=rw,g=r,o=r file.txt': Sets read and write permissions for the owner and read-only permissions for the group and others.
+       
+      Octal Notation:
+      – Octal notation is a numeric representation of permissions, where each digit corresponds to a permission set (owner, group, others).
+      – Each digit is the sum of the numeric values for the permissions (4 for read, 2 for write, 1 for execute).
+      – For example:
+        – 'chmod 644 file.txt': Sets read and write permissions for the owner and read-only permissions for the group and others.
+        – 'chmod 755 script.sh': Gives the owner full control (read, write, execute) and read/execute permissions to the group and others.
+      
+       
+File Ownership:
+      
+      Every file and directory in Linux has an owner and a group associated with it. The owner is usually the user who created the file, while the group can be set to a specific group or inherited from the user’s default group.
+
+      – 'chown' (Change Owner): The 'chown' command is used to change the owner of a file or directory. The syntax is: 'chown [new_owner] [file]'.
+         – For example: 'chown johndoe file.txt' changes the owner of “file.txt” to the user “johndoe.”
+
+      – 'chgrp' (Change Group): The 'chgrp' command is used to change the group associated with a file or directory. The syntax is: 'chgrp [new_group] [file]'.
+        – For example: 'chgrp developers project/' changes the group of the “project” directory to “developers.”
+      
+     Managing file ownership and group membership is essential for granting access to specific users and groups while maintaining security
+
+Links:
+   Hard Links:
+   
+     Definition:
+       – A hard link is an additional reference to an existing inode (the data structure that stores file information, including content and metadata) in the file system.
+       – Hard links essentially create multiple directory entries pointing to the same data on disk.
+     File System Level:
+       – Hard links operate at the file system level and do not rely on symbolic references.
+       – All hard links to the same inode are equal; there is no concept of an original or primary link.
+   
+     Cross-File System Limitation:
+       – Hard links cannot span multiple file systems or partitions. They must exist within the same file system.
+       
+     File Deletion and Data Persistence:
+       – When a file is deleted, the data remains on disk until all hard links to that inode are removed.
+       – Hard links do not have a separate link count, as the link count is part of the inode metadata.
+       
+   Soft Links (Symbolic Links or Symlinks):
+   
+     Definition:
+       – A soft link (symlink) is a separate file that contains a path reference to another file or directory.
+       – Symlinks are more like shortcuts or pointers, as they reference the file or directory by its path rather than its inode.
+      
+     File System Level:
+       – Soft links are at a higher level than hard links and rely on symbolic references.
+       – They are separate entities pointing to the target file or directory by name and path.
+       
+     Cross-File System Compatibility:
+       – Symlinks can span different file systems or partitions since they reference files by their path.
+       
+     File Deletion and Data Persistence:
+       – If the target of a symlink is deleted or moved, the symlink becomes “dangling” and points to a non-existent location.
+       – Deleting a symlink does not affect the target file or directory.
+     
+   Use Cases:
+   – Hard Links:
+     – Hard links are mainly used for creating multiple directory entries that point to the same physical data on disk.
+     – They are commonly used for creating file versions and snapshots.
+     – Hard links are efficient in terms of disk space, as they don’t create additional copies of the data.
+   
+   – Soft Links:
+     – Soft links are more versatile and are often used for creating references to files or directories that may be located in different locations or on different file systems.
+     – They are commonly used for creating symbolic references to shared libraries, configuration files, and directories.
+     – Symlinks are useful for creating shortcuts and managing file or directory locations without duplicating data.
+
+
+Finding Files and Directories
+    1.find Command:
+     – The find command is a powerful and versatile tool for searching files and directories in a directory hierarchy.
+     – Syntax: 'find [starting_directory] [options] [search_criteria]'
+     – Common options:
+       – -name: Search by file/directory name.
+       – -type: Specify the type (e.g., -type f for files, -type d for directories).
+       – -size: Search by file size.
+       – -mtime: Search by modification time.
+     – Examples:
+       – find /home/user -name myfile.txt: Searches for a file named “myfile.txt” in the “/home/user” directory and its subdirectories.
+       – find /var/log -type f -mtime -7: Finds files modified in the last 7 days in the “/var/log” directory.
+     
+    2.locate Command:
+     – The locate command provides fast file searching by using a pre-built database of file paths.
+     – Syntax: 'locate [filename]'
+     – Example: locate myfile.txt searches for “myfile.txt” in the entire file system (based on the pre-built database).
+     
+    3.which Command:
+     – The which command is used to locate the executable file associated with a given command or program in your system’s PATH.
+     – Syntax: 'which [command]'
+     – Example: which ls shows the location of the “ls” command.
+     
+    4.whereis Command:
+     – The whereis command locates the binary, source, and manual page files for a specified command or program.
+     – Syntax: 'whereis [command]'
+     – Example: whereis python displays the locations of Python-related files. 
+     
+    5.locate and updatedb:
+     – The locate command relies on a periodically updated database. To ensure it reflects recent changes, you can use the updatedb command to update the database.
+     – Syntax: 'sudo updatedb'
+     – After running updatedb, you can use locate to search for recently added or modified files.
+     
+    6.grep Command:
+     – While not a dedicated file-finding tool, grep can be used to search for files containing specific text patterns.
+     – Syntax: 'grep [options] [pattern] [files/directories]'
+     – Example: 'grep -r “search_term” /path/to/search searches' (for “search_term” in all files under “/path/to/search.”)
+     
+    7.GUI File Managers:
+     – Graphical file managers like Nautilus, Dolphin, and Thunar provide search functionality with user-friendly interfaces, allowing you to find files and directories using various criteria.
+
+File compression and archiving using tar, gzip, zip,etc.
+    1.tar (Tape Archive):
+     – tar is used for creating archives of files and directories. 
+     – To create a tar archive: tar -cvf archive.tar files/directories
+        – -c: Create a new archive.
+        – -v: Verbosely list the files processed. 
+        – -f: Specify the archive file name.
+     – To extract files from a tar archive: tar -xvf archive.tar 
+     – To list the contents of a tar archive: tar -tvf archive.tar 
+     – To add files to an existing archive: tar -rvf archive.tar new_files
+
+    2.gzip:
+     – gzip is used for compressing individual files. It doesn’t create archives.
+     – To compress a file: gzip filename (creates filename.gz)
+     – To decompress a gzip file: gzip -d filename.gz
+
+    3.zip:
+     – zip is used for creating compressed archives that can contain multiple files and directories.
+     – To create a zip archive: zip archive.zip files/directories
+     – To extract files from a zip archive: unzip archive.zip
+     – To list the contents of a zip archive: unzip -l archive.zip
+
+    4.unzip:
+     – unzip is used for extracting files from zip archives.
+     – To extract files from a zip archive: unzip archive.zip
+
+    5.bzip2:
+     – bzip2 is similar to gzip but offers better compression ratios in most cases.
+     – To compress a file: bzip2 filename (creates filename.bz2)
+     – To decompress a bzip2 file: bzip2 -d filename.bz2
+
+    6.7-Zip (p7zip):
+     – 7-Zip is a popular compression tool that supports various formats and is available on multiple platforms.
+     – To create a 7z archive: 7z a archive.7z files/directories
+     – To extract files from a 7z archive: 7z x archive.7z
