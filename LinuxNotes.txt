@@ -1,0 +1,115 @@
+Basics:
+   -In 1991 by Linus Torvalds
+   -It is freely distributed under the GNU (General Public License)
+   -It is a kernel-based operating system
+
+Characteristics:
+   -Open source
+   -Security 
+   -Stability and Readability
+   -Flexibility
+   -Performance
+
+Distributions:
+   Ubuntu, Debian, RedHat, Fedora, CentOS, and Arch Linux 
+
+File System:
+   -A file system is organized as a hierarchical tree-like structure, 
+    starting with a root directory (“/”) as the top-level directory.
+   -Metadata includes the file name, size, type, owner, permissions, 
+    timestamps (creation, modification, access), and location within the file system.
+   -Mount Points: Storage devices are mounted at specific directories within 
+    the file system hierarchy. These directories are called "mount points".
+   -fsck for the file system check 
+
+Types of File system in Linux:
+  1.ext4 (Fourth Extended File System):
+    -default 
+    -supports file system size up to 16 TB i.e supports  larger file sizes and 
+     faster file system checks 
+    -It is known for its stability and backwards compatibility
+  2.XFS(XFS File System):
+    -High performance and scalable filesystem for large storage volumes 
+    -It is designed for data-intensive applications like databases and media storage.
+    -It supports features like delayed allocation, online resizing and journal checksumming
+  3.Btrfs(B-tree File System):
+    -Btrfs is a modern copy-on-write file system that offers features like snapshots,
+     data deduplication and integrated RAID support.
+    -Suitable for tasks like data backup and storage management.
+  4.ZFS(Zettabyte File System):
+    -By Sun Microsystems
+    -ZFS supports advanced features like data compression, snapshots, data integrity
+     verification, and RAID-Z for redundancy.
+    -ZFS can be used on Linux through third-party modules or user-space implementations like
+     ZFS on Linux (ZoL).
+  5.F2FS(Flash-Friendly File System):
+    -Designed for NAND flash memory-based storage devices such as SSDs and eMMC.
+    -It optimizes file access patterns and wear leveling for flash storage, improving
+     performance and prolonging the lifespan of the devices.
+    -F2FS is suitable for use in embedded systems, mobile devices, and system wiht solid
+     state storage.
+  6.NILFS(New Implementation of a Log-Structured File System):
+    -It provides continuous snapshots for data recovery and versioning
+    -It is useful for scenarios where maintaining a history of file changes is critical such as in data
+     analysis or research environments.
+  7.ReiserFS and Reiser4:
+    -It is designed with a focus on efficient disk space and utilization and support for small files.
+    -Features like plug-ins for various data structures and advanced Metadata handling.
+
+FHS(Standard directory structure):
+    1./(Root directory):
+        -Contains the system's boot loader, kernel, and other critical system files.
+        -Top-level directory and the starting point of the file system hierarchy.
+    2./bin (Binary Binaries):
+        -Stores essential binary executables (commands) that are required for system recovery and repair.
+        -Common command-line utilities like `ls`, `cp`, and `mkdir` are found here.
+    3./boot (Boot loader):
+        -Contains files related to the system's boot process, including the kernel image, initial ramdisk(initramfs),
+         and bootloader configuration files(GRUB).
+    4./dev (Device files):
+        -Contains device files that represent physical devices such as hard drives, network interfaces, and printers.
+        -Device nodes are used to communicate with and control hardware components.
+    5./etc (Configuration files):
+        -Stores system-wide configuration files for various system services and applications.
+        -Contains files like `/etc/fstab`, `/etc/passwd`, and `/etc/hosts.
+    6./home (User home directories):
+        -Regular users are typically located here.
+        -Each user has their own home directory, which contains their personal files and settings.
+    7./lib (Shared libraries):
+        -Contains shared libraries that are essential for the functioning of programs in /bin and /sbin.
+        -Subdirectories like '/lib64' may exist on 64-bit systems to house 64-bit libraries.
+    8./media (Mount point for removable media):
+        -Used as a mount point for removable storage devices such as USB drives and external hard disks.
+        -Mounting these devices under /media provides convenient access to their contents.
+    9./mnt (Mount point for temporary file systems):
+        -Provides a location for temporary mount points used for mounting file systems.
+        -Users or administrators can manually mount additional storage devices or network shares here.
+    10./opt (Optional packages):
+        -Stores optional software packages that are not part of the core system.
+        -Third-party software or add-ons can be installed here.
+    11./proc (Process information):
+        -A virtual file system that provides information about running processes, system configuration,
+         and kernel parameters.
+        -Used for interacting with and monitoring the system and its processes.
+    12./root (Root directory):
+        -Contains the home directory of the root user, which has full access to the system.
+        -Contains configuration files and data specific tothe root user.
+    13./run (Runtime variables):
+        -Contains runtime variables and information about running processes and services.
+        -Used for storing temporary data and configuration files that are not persistent across reboots.
+    14./sbin (System binaries):
+        -Similar to /bin but contains binary executables for system administration tasks that require root privileges.
+        -Commands like 'mount', 'ifconfig', and 'fdisk' are stored here.
+    15./srv (Service data):
+        -Contains data for services that are available to the system.
+        -For example, web server content or mail server data can be stored here.
+    16./tmp (Temporary files):
+        -Used for temporary storage of files and directories by various applications and users.
+        -Files in /tmp are typically deleted on system reboot.
+    17./usr (User utilities):
+        -Contains user utilities and applications that are not part of the core system.
+        -Contains subdirectories like '/usr/bin', '/usr/sbin', and '/usr/local'.
+        -One of the largest directories on the system 
+    18./var (Variable Data):
+        -Stores variable data files, such as log files, spool files, and temporary data created by system services and applications.
+        -Contains subdirectories like /var/log and /var/run.
