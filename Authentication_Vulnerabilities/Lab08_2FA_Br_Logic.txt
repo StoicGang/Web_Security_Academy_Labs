@@ -13,4 +13,12 @@ Lab #8: 2FA broken logic
       >> Login using given credentials and 2FA code 
       >> manipulate the request login2 and login to get session cookies for carlos
       >> there is no brute force attack management so we can use intruder to guess the 4 digit code
-      >> brute force the 2FA code and paste to get accoun's access 
+      >> brute force the 2FA code and paste to get account's access 
+
+      >> There are two request of /login2 (GET & POST method) 
+      >> Application does not crashes when the session cookie parameter is removed (vul1)
+      >> it is dependent on client side parameter to work the fucntion of mfa hence anyone can change the verify cookie to gain access to the session of other users
+      >> change the POST method to verify=carlos and send the request otherwise we can't bruteforce it
+      >> after that use intruder to bruteforce the mfa code of carlos and find 302 redirects
+      >> follow redirection and get the session cookies of carlos user
+      >> change the value of session cookies of wiener user in the browser and refresh it 
