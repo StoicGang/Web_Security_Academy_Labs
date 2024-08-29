@@ -9,5 +9,5 @@ Lab #3: SSRF with blacklist-based input filter
           website is using .regex search using blacklist to prevent some keywords so change thm using encoding 
 
          >> Send the check stock URL to the repeater and decode the 'stockApi' parameter 
-         >> Change the 'stockApi' parameter to http://127.1/admin to get the admin interface or admin panel 
+         >> Change the 'stockApi' parameter to http://127.1/admin to get the admin interface or admin panel ( in this url encode 'a' as url twice)
          >> Change the 'stockApi' parameter to http://localhost/admin/delete?username=carlos  to delete the user carlos
